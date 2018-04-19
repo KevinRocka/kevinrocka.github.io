@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>《Android艺术探索》读书笔记 第二章. IPC | </title>
+    <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="IPC 简介
+线程是CPU调度的最小单元
+IPC指进程间通信，Binder是Android中特色的进程间通信方式
+
+Android中的多进程
+Android多进程的启动
+
+给四大组件设置指定android:process = “:remote”属性启动多进程
+进程以:开头属于当前应用的私用进程，其他">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="《Android艺术探索》读书笔记 第二章. IPC"/>
+    <meta property="og:site_name" content="Rocka&#39;s Tec"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Rocka&#39;s Tec" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Rocka&#39;s Tec</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            Archives
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            Reading
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            About
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            Search
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1423547583.03.webp" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">任嘉为</p>
+                        <p class="desc">移动开发/技术</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    Home
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    Archives
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    Categories
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    Reading
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    About
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    Search
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">Search</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">Current page(Categories)</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>《Android艺术探索》读书笔记 第二章. IPC</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-08-01T02:42:00.000Z"><a href="/2016/08/01/android_art_2_ipc/">2016-08-01</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#IPC-简介"><span class="section table-of-contents-text">IPC 简介</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Android中的多进程"><span class="section table-of-contents-text">Android中的多进程</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Android中IPC基础概念"><span class="section table-of-contents-text">Android中IPC基础概念</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Android-IPC的方式"><span class="section table-of-contents-text">Android IPC的方式</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="IPC-简介"><a href="#IPC-简介" class="headerlink" title="IPC 简介"></a>IPC 简介</h2><ul>
+<li>线程是CPU调度的最小单元</li>
+<li>IPC指进程间通信，Binder是Android中特色的进程间通信方式</li>
+</ul>
+<h2 id="Android中的多进程"><a href="#Android中的多进程" class="headerlink" title="Android中的多进程"></a>Android中的多进程</h2><ul>
+<li><p>Android多进程的启动</p>
+<ul>
+<li>给四大组件设置指定android:process = “:remote”属性启动多进程</li>
+<li>进程以:开头属于当前应用的私用进程，其他应用的组件不可以和它跑在同一个进程中，进程名不以:开头进程属于全局进程，其他应用通过shareUID可以和他跑在同一个进程，两个应用通过ShareUID跑在一个进程除了uid要一致还要签名一致。</li>
+</ul>
+<blockquote>
+<p>Android 在多进程中通过内存共享数据，都会失败，在多进程模式中，不同进程的组件会有不同的虚拟机，不同的内存空间以及不同的Application.</p>
+</blockquote>
+</li>
+<li>Android多进程带来的问题<ul>
+<li>静态成员或者单例模式失效</li>
+<li>线程同步机制失效</li>
+<li>SharedPreference的读写XML可靠性下架</li>
+<li>Application会多次创建</li>
+</ul>
+</li>
+</ul>
+<h2 id="Android中IPC基础概念"><a href="#Android中IPC基础概念" class="headerlink" title="Android中IPC基础概念"></a>Android中IPC基础概念</h2><ul>
+<li>序列化和反序列化<ul>
+<li>静态成员变量属于类不属于对象，所以不能序列化，用transient修饰的成员变量也不能序列化</li>
+<li>序列化前和序列化后对象内容相同，但是产生了两个对象</li>
+<li>Serializable是java序列化接口，用I/O操作，开销大，使用简单。Parcelable是Android序列化接口，用在内存序列化上，通过Parcelable将对象序列化到设备中或者序列化后网络传输，推荐，使用麻烦。</li>
+</ul>
+</li>
+<li><code>-</code>Binder<ul>
+<li>Binder 首先内部两个整形ID标记这两个方法，然后这两个id用于表示在transact过程中客户端到底是哪个方法，接着声明一个内部类Stub，这个内部类就是一个Binder类，客户端位于同一进程不走跨进程的transact方法，反之，这个逻辑有Proxy完成，Binder内部采用的是代理-存根的设计模式</li>
+<li>客户端通过IBinder.DeathRecipient来监听Binder死亡，也可以在onServiceDisconnected中监听并重连服务端。区别在于前者是在binder线程池中，访问UI需要用Handler，后者则是UI线程。</li>
+<li>工作机制：<br><img src="Binder.png" alt="image"></li>
+</ul>
+</li>
+</ul>
+<h2 id="Android-IPC的方式"><a href="#Android-IPC的方式" class="headerlink" title="Android IPC的方式"></a>Android IPC的方式</h2><ul>
+<li>Bundle：因为实现了Parcelable接口，所以可以在不同进程间进行传输</li>
+</ul>
+<ul>
+<li>文件共享： <ul>
+<li>采用序列化和反序列化得方式读写文件，可以进行进程间通讯，只是要处理并发读/写的问题。</li>
+<li>采用SharedPreference：读/写有一定的缓存策略，内存中会存有，很大几率丢失。不建议。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Messenger：是AIDL的一次封装，而且一次只能处理一个请求，不能处理并发消息，因此服务端不用考虑线程同步的问题。</li>
+</ul>
+<ul>
+<li>AIDL：<ul>
+<li>AIDL使用流程：首先创建一个Service和一个AIDL接口，接着创建一个类继承自AIDL借口中的Stub类并且实现Stub类的抽象方法，在service的onBind方法中返回这个类的对象，然后客户端就可以绑定服务端的service，建立连接后就可以远程访问服务端了.</li>
+<li>服务端可以使用CopyOnWriteArrayList和ConcurrentHashMap来进行自动线程同步，客户端拿到的依然是ArrayList和HashMap；</li>
+<li>可通过自定义权限在onBind或者onTransact中进行权限验证</li>
+</ul>
+</li>
+<li>ContentProvider:<ul>
+<li>ContentProvider 底层的实现同样是Binder</li>
+<li>自定义一个继承ContentProvider，六个抽象方法中，onCreate()是运行在主线程中，其余的是运行在Binder线程中</li>
+<li>在android.manifest里面注册provider的时候指定android:authorities标识，可以让外部应用访问这个组件</li>
+<li>ContentProvider 操作数据库的时候增删改查四大方法是存在多线程并发的，方法内部需做好线程同步访问，SQLite只有一个SQLiteDatabase的连接，可以应对多线程的情况，因为SQLiteDatabase内部对数据库操作有做同步，多个数据库对象就没法进行线程同步。</li>
+</ul>
+</li>
+<li>Socket:<ul>
+<li>TCP协议是面向连接的协议，提供稳定的双向通信功能，有三次握手，稳定，提供重传机制；UDP无连接，不稳定单项连接功能，更高效率，但是数据不一定正确传输</li>
+<li>IP地址可见，可以实现设备之间的通讯，类似与助手类软件的免流量分享功能</li>
+</ul>
+</li>
+<li>Binder连接池： <ul>
+<li>工作机制：每个业务模块创建自己的AIDL接口并实现这个接口，不同业务模块之间不能拿有耦合的情况，单独开来，然后向服务端提供自己的唯一标识和其对应的binder对象；服务端只需要一个service，提供一个查询querybinder接口，根据业务特征返回binder对象，不同业务模块拿到自己的Binder对象就可以远程方法调用了，避免service的创建。</li>
+<li>这里用到了CountDownLatch，大概解释下用意：线程在await后等待，直到CountDownLatch的计数为0，BinderPool里使用它的目的是为了保证Activity获取BinderPool的时候Service已确定bind完成～</li>
+</ul>
+</li>
+</ul>
+
+                
+<p class="pink-link-context">
+    <a href="/2016/08/05/android_art_3_viewevent/" rel="next" title="《Android艺术探索》读书笔记 第三章. View_Event">
+    Prev: 《Android艺术探索》读书笔记 第三章. View_Event
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/07/25/android_art_1_activity/" rel="next" title="《Android艺术探索》读书笔记 第一章.Activity">
+    Next: 《Android艺术探索》读书笔记 第一章.Activity
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="Return to top"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="Menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">Social</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">Links</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">Blog powered by <a href="https://hexo.io">Hexo</a> | Theme <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

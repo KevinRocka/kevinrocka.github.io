@@ -1,0 +1,633 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>《Android艺术探索》读书笔记 第六章. Drawable | </title>
+    <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="Drawable简介
+Android的Drawable表示的是一种可以在Canvas上进行绘制的概念，它的种类很多，最常见的就是图片和颜色了。它有两个重要的优点：一是比自定义view要简单；二是非图片类型的drawable占用空间小，利于减小apk大小。
+
+Drawable是抽象类，是所有Drawa">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="《Android艺术探索》读书笔记 第六章. Drawable"/>
+    <meta property="og:site_name" content="Rocka&#39;s Tec"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Rocka&#39;s Tec" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Rocka&#39;s Tec</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            Home
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            Archives
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            Categories
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            Reading
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            About
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            Search
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1423547583.03.webp" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">任嘉为</p>
+                        <p class="desc">移动开发/技术</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    Home
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    Archives
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    Categories
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    Reading
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    About
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    Search
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">Search</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">Current page(Categories)</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>《Android艺术探索》读书笔记 第六章. Drawable</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-08-14T02:42:00.000Z"><a href="/2016/08/14/android_art_6_drawable/">2016-08-14</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Drawable简介"><span class="section table-of-contents-text">Drawable简介</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Drawable分类"><span class="section table-of-contents-text">Drawable分类</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Drawable自定义"><span class="section table-of-contents-text">Drawable自定义</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="Drawable简介"><a href="#Drawable简介" class="headerlink" title="Drawable简介"></a>Drawable简介</h2><ul>
+<li><p>Android的Drawable表示的是一种可以在Canvas上进行绘制的概念，它的种类很多，最常见的就是图片和颜色了。它有两个重要的优点：一是比自定义view要简单；二是非图片类型的drawable占用空间小，利于减小apk大小。</p>
+</li>
+<li><p>Drawable是抽象类，是所有Drawable对象的基类。</p>
+</li>
+<li><p>Drawable的内部宽/高可以通过getIntrinsicWidth和getIntrinsicHeight方法获取，但是并不是所有Drawable都有内部宽/高。图片Drawable的内部宽高就是图片的宽高，但是颜色Drawable就没有宽高的概念，它一般是作为view的背景，所以会去适应view的大小，这两个方法都是返回-1。</p>
+</li>
+</ul>
+<h2 id="Drawable分类"><a href="#Drawable分类" class="headerlink" title="Drawable分类"></a>Drawable分类</h2><ul>
+<li>BitmapDrawable表示一张图片，对应xml标签</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">bitmap</span> / <span class="attr">nine-patch</span></span></span><br><span class="line"><span class="tag">	    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">	    <span class="attr">android:src</span>=<span class="string">"@[package:]drawable/drawable_resource"</span></span></span><br><span class="line"><span class="tag">	    <span class="attr">android:antialias</span>=<span class="string">[</span>"<span class="attr">true</span>" | "<span class="attr">false</span>"]</span></span><br><span class="line"><span class="tag">	    <span class="attr">android:dither</span>=<span class="string">[</span>"<span class="attr">true</span>" | "<span class="attr">false</span>"]</span></span><br><span class="line"><span class="tag">	    <span class="attr">android:filter</span>=<span class="string">[</span>"<span class="attr">true</span>" | "<span class="attr">false</span>"]</span></span><br><span class="line"><span class="tag">	    <span class="attr">android:gravity</span>=<span class="string">[</span>"<span class="attr">top</span>" | "<span class="attr">bottom</span>" | "<span class="attr">left</span>" | "<span class="attr">right</span>" | "<span class="attr">center_vertical</span>" |</span></span><br><span class="line"><span class="tag">	                      "<span class="attr">fill_vertical</span>" | "<span class="attr">center_horizontal</span>" | "<span class="attr">fill_horizontal</span>" |</span></span><br><span class="line"><span class="tag">	                      "<span class="attr">center</span>" | "<span class="attr">fill</span>" | "<span class="attr">clip_vertical</span>" | "<span class="attr">clip_horizontal</span>"]</span></span><br><span class="line"><span class="tag">	    <span class="attr">android:tileMode</span>=<span class="string">[</span>"<span class="attr">disabled</span>" | "<span class="attr">clamp</span>" | "<span class="attr">repeat</span>" | "<span class="attr">mirror</span>"] /&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>android:antialias：是否开启图片抗锯齿功能。开启后会让图片变得平滑，同时也会一定程度上降低图片的清晰度，建议开启；</li>
+<li>android:dither：是否开启抖动效果。当图片的像素配置和手机屏幕像素配置不一致时，开启这个选项可以让高质量的图片在低质量的屏幕上还能保持较好的显示效果，建议开启。</li>
+<li>android:filter：是否开启过滤效果。当图片尺寸被拉伸或压缩时，开启过滤效果可以保持较好的显示效果，建议开启；</li>
+<li>android:gravity：当图片小于容器的尺寸时，设置此选项可以对图片进行定位。</li>
+<li>android:tileMode：平铺模式，有四种选项[“disabled” | “clamp” | “repeat” | “mirror”]。当开启平铺模式后，gravity属性会被忽略。repeat是指水平和竖直方向上的平铺效果；mirror是指在水平和竖直方向上的镜面投影效果；clamp是指图片四周的像素会扩展到周围区域，这个比较特别。</li>
+<li>NinePatchDrawable，表示一张.9图， ,在bitmap标签中也可以使用.9图。</li>
+<li>ShapDrawable表示以颜色构造的图形，可以纯色，也可以渐变。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">shape</span>    </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>    </span></span><br><span class="line"><span class="tag">    <span class="attr">android:shape</span>=<span class="string">[</span>"<span class="attr">rectangle</span>" | "<span class="attr">oval</span>" | "<span class="attr">line</span>" | "<span class="attr">ring</span>"] &gt;</span>    </span><br><span class="line">    	<span class="tag">&lt;<span class="name">corners</span>        //当<span class="attr">shape</span>为<span class="attr">rectangle</span>时使用</span></span><br><span class="line"><span class="tag">	        <span class="attr">android:radius</span>=<span class="string">"integer"</span>        //半径值会被后面的单个半径属性覆盖，默认为<span class="attr">1dp</span></span></span><br><span class="line"><span class="tag">	        <span class="attr">android:topLeftRadius</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:topRightRadius</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:bottomLeftRadius</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:bottomRightRadius</span>=<span class="string">"integer"</span> /&gt;</span>    </span><br><span class="line">	    <span class="tag">&lt;<span class="name">gradient</span>       //渐变</span></span><br><span class="line"><span class="tag">	        <span class="attr">android:angle</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:centerX</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:centerY</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:centerColor</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:endColor</span>=<span class="string">"color"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:gradientRadius</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:startColor</span>=<span class="string">"color"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:type</span>=<span class="string">[</span>"<span class="attr">linear</span>" | "<span class="attr">radial</span>" | "<span class="attr">sweep</span>"]        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:useLevel</span>=<span class="string">[</span>"<span class="attr">true</span>" | "<span class="attr">false</span>"] /&gt;</span>    </span><br><span class="line">	    <span class="tag">&lt;<span class="name">padding</span>        //内边距</span></span><br><span class="line"><span class="tag">	        <span class="attr">android:left</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:top</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:right</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:bottom</span>=<span class="string">"integer"</span> /&gt;</span>    </span><br><span class="line">	    <span class="tag">&lt;<span class="name">size</span>           //指定大小，一般用在<span class="attr">imageview</span>配合<span class="attr">scaleType</span>属性使用</span></span><br><span class="line"><span class="tag">	        <span class="attr">android:width</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:height</span>=<span class="string">"integer"</span> /&gt;</span>    </span><br><span class="line">	    <span class="tag">&lt;<span class="name">solid</span>          //填充颜色</span></span><br><span class="line"><span class="tag">	        <span class="attr">android:color</span>=<span class="string">"color"</span> /&gt;</span>    </span><br><span class="line">	   	<span class="tag">&lt;<span class="name">stroke</span>         //边框</span></span><br><span class="line"><span class="tag">	      	<span class="attr">android:width</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:color</span>=<span class="string">"color"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:dashWidth</span>=<span class="string">"integer"</span>        </span></span><br><span class="line"><span class="tag">	        <span class="attr">android:dashGap</span>=<span class="string">"integer"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code>* android:shape：默认的shape是矩形，line和ring这两种形状需要通过&lt;stroke&gt;来制定线的宽度和颜色，否则看不到效果。
+* gradient：solid表示纯色填充，而gradient表示渐变效果。andoid:angle指渐变的角度，默认为0，其值必须是45的倍数，0表示从左到右，90表示从下到上，其他类推。
+* padding：这个表示的是包含它的view的空白，四个属性分别表示四个方向上的padding值。
+</code></pre><p>size：ShapeDrawable默认情况下是没有宽高的概念的，但是可以如果指定了size，那么这个时候shape就有了所谓的固有宽高，但是作为view的背景时，shape还是会被拉伸或者缩小为view的大小。</p>
+<ul>
+<li><p>LayerDrawable 对应标签<layer-list>，表示层次化的Drawable集合，实现一种叠加后的效果, 属性android:top/left/right/bottom表示drawable相对于view的上下左右的偏移量，单位为像素。</layer-list></p>
+</li>
+<li><p>StateListDrawable对应 ,可以根据view的状态自动选择drawable,对应标签<selector>，也是表示Drawable集合，每个drawable对应着view的一种状态。</selector></p>
+</li>
+<li><p>LevelListDrawable，对应标签<level-list>，同样是Drawable集合，每个drawable还有一个level值，根据不同的level，LevelListDrawable会切换不同的Drawable，level值范围从0到100000。</level-list></p>
+</li>
+<li>TransitionDrawable标签<transition>，用于实现两个Drawable之间的淡入淡出效果。</transition></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/	android"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/shape_drawable_gradient_linear"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/shape_drawable_gradient_radius"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line">TransitionDrawable drawable = (TransitionDrawable) v.getBackground();</span><br><span class="line">drawable.startTransition(5000);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>InsetDrawable标签<inset>，它可以将其他drawable内嵌到自己当中，并可以在四周留出一定的间距。当一个view希望自己的背景比自己的实际区域小的时候，可以采用InsetDrawable来实现。</inset></p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">inset</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:insetBottom</span>=<span class="string">"15dp"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:insetLeft</span>=<span class="string">"15dp"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:insetRight</span>=<span class="string">"15dp"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:insetTop</span>=<span class="string">"15dp"</span> &gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">shape</span> <span class="attr">android:shape</span>=<span class="string">"rectangle"</span> &gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">solid</span> <span class="attr">android:color</span>=<span class="string">"#ff0000"</span> /&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">inset</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ScaleDrawable可以根据level将指定的drawable缩放到一定比例。Level越大，内部drawable看起来也就越大</p>
+</li>
+<li><p>ClipDrawable可以根据自己当前level裁剪另一个drawable。Level越大，裁剪区域越小</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">clip</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">   	<span class="attr">android:clipOrientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">   	<span class="attr">android:drawable</span>=<span class="string">"@drawable/image1"</span></span></span><br><span class="line"><span class="tag">   	<span class="attr">android:gravity</span>=<span class="string">"bottom"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AnimationDrawable可以播放帧动画 </p>
+</li>
+<li>ColorDrawable代表单色</li>
+</ul>
+<h2 id="Drawable自定义"><a href="#Drawable自定义" class="headerlink" title="Drawable自定义"></a>Drawable自定义</h2><ul>
+<li>Drawable的工作核心就是draw方法，所以自定义drawable就是重写draw方法，当然还有setAlpha、setColorFilter和getOpacity这几个方法。当自定义Drawable有固有大小的时候最好重写getIntrinsicWidth和getIntrinsicHeight方法。</li>
+<li>Drawable的内部大小不等于Drawable的实际区域大小，Drawable的实际区域大小可以通过它的getBounds方法来得到，一般来说它和view的尺寸相同。</li>
+</ul>
+
+                
+<p class="pink-link-context">
+    <a href="/2016/08/15/android_art_8_window/" rel="next" title="《Android艺术探索》读书笔记 第八章. Window">
+    Prev: 《Android艺术探索》读书笔记 第八章. Window
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2016/08/14/android_art_7_animation/" rel="next" title="《Android艺术探索》读书笔记 第七章. Animation">
+    Next: 《Android艺术探索》读书笔记 第七章. Animation
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="Return to top"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="Menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">Social</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">Links</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">Blog powered by <a href="https://hexo.io">Hexo</a> | Theme <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading, .menu-about').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
