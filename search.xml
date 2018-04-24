@@ -144,21 +144,6 @@
     </entry>
     
     <entry>
-      <title>JNI - C基础2</title>
-      <link href="/home/2017/11/02/c4jni_2/"/>
-      <url>/home/2017/11/02/c4jni_2/</url>
-      <content type="html"><![CDATA[<h2 id="多级指针"><a href="#多级指针" class="headerlink" title="多级指针"></a>多级指针</h2><h2 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h2><h2 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h2><h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2>]]></content>
-      
-      
-        <tags>
-            
-            <tag> 指针 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>热更新 AndFix 源码解析</title>
       <link href="/home/2017/11/02/android_rocka_hotfix/"/>
       <url>/home/2017/11/02/android_rocka_hotfix/</url>
@@ -168,6 +153,21 @@
         <tags>
             
             <tag> Android 进阶 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>JNI - C基础2</title>
+      <link href="/home/2017/11/02/c4jni_2/"/>
+      <url>/home/2017/11/02/c4jni_2/</url>
+      <content type="html"><![CDATA[<h2 id="多级指针"><a href="#多级指针" class="headerlink" title="多级指针"></a>多级指针</h2><h2 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h2><h2 id="指针赋值"><a href="#指针赋值" class="headerlink" title="指针赋值"></a>指针赋值</h2><h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 指针 </tag>
             
         </tags>
       
