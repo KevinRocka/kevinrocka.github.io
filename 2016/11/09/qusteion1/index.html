@@ -175,8 +175,56 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/Android艺术探索/">
+                    Android艺术探索 <span class="right">13 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/Android进阶/">
+                    Android进阶 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/JNI/">
+                    JNI <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/home/categories/设计模式/">
-                    设计模式 <span class="right">1 篇</span></a>
+                    设计模式 <span class="right">6 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/Android性能优化/">
+                    Android性能优化 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/PC应用开发/">
+                    PC应用开发 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/home/categories/Android问题集锦/">
+                    Android问题集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -210,6 +258,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/home/categories/Android问题集锦/">Android问题集锦</a>
+
 
         
 
@@ -280,12 +332,11 @@
 <li><p>问题6：WebView崩溃</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Throwable: Error: WebView.destroy() called <span class="keyword">while</span> still attached!</span><br></pre></td></tr></table></figure>
 <p>  修改如下：</p>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       cleanCookie();</span><br><span class="line">       <span class="keyword">if</span> (mWebView != <span class="keyword">null</span>) &#123;</span><br><span class="line">           mWebView.removeAllViews();</span><br><span class="line">           ((ViewGroup) mWebView.getParent()).removeView(mWebView);</span><br><span class="line">           mWebView.destroy();</span><br><span class="line">           mWebView = <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">super</span>.onDestroy();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       cleanCookie();</span><br><span class="line">       <span class="keyword">if</span> (mWebView != <span class="keyword">null</span>) &#123;</span><br><span class="line">           mWebView.removeAllViews();</span><br><span class="line">           ((ViewGroup) mWebView.getParent()).removeView(mWebView);</span><br><span class="line">           mWebView.destroy();</span><br><span class="line">           mWebView = <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">super</span>.onDestroy();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>问题7 ：DialogFragment异常崩溃</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Can not perform <span class="keyword">this</span> action after</span><br><span class="line"> onSaveInstanceState with DialogFragment</span><br></pre></td></tr></table></figure>
-<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数要使用activity.getFragmentManager().beginTransaction()</span></span><br><span class="line">dialogFragment.show(activity.getFragmentManager().beginTransaction(), </span><br><span class="line">                dialogFragment.getClass().getName());</span><br></pre></td></tr></table></figure>
-</code></pre></li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数要使用activity.getFragmentManager().beginTransaction()</span></span><br><span class="line">dialogFragment.show(activity.getFragmentManager().beginTransaction(), </span><br><span class="line">                dialogFragment.getClass().getName());</span><br></pre></td></tr></table></figure></li>
 </ul>
 
                 
