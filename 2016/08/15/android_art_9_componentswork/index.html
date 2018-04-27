@@ -323,7 +323,7 @@ Service是一种计算型组件，用于在后台执行一系列计算任务。�
 </li>
 <li><p>ContextImpl是Context的具体实现，ContextImpl是通过Activity的attach方法来和Activity建立关联的，在attach方法中Activity还会完成Window的创建并建立自己和Window的关联，这样当window接收到外部输入事件后就可以将事件传递给Activity。 [这里可能有误，应该是Activity将事件传递给window]</p>
 </li>
-<li><p>Activity启动过程<br><img src="android_art_9_componentswork/Activity.png" alt="image"></p>
+<li><p>Activity启动过程<br><img src="Activity.png" alt="image"></p>
 </li>
 </ul>
 <h2 id="Service-工作流程"><a href="#Service-工作流程" class="headerlink" title="Service 工作流程"></a>Service 工作流程</h2><ul>
@@ -335,21 +335,21 @@ Service是一种计算型组件，用于在后台执行一系列计算任务。�
 <p>另一种是绑定状态，用于与其他组件和Service交互。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bindService (intetService, mServiceConnetcion ,BIND_AUTO_CREATE);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>启动过程<br><img src="android_art_9_componentswork/Service1.png" alt="image"></p>
+<li><p>启动过程<br><img src="Service1.png" alt="image"></p>
 </li>
-<li><p>绑定过程<br><img src="android_art_9_componentswork/Service2.png" alt="image"></p>
+<li><p>绑定过程<br><img src="Service2.png" alt="image"></p>
 </li>
 </ul>
 <h2 id="BroadcastReceiver-工作流程"><a href="#BroadcastReceiver-工作流程" class="headerlink" title="BroadcastReceiver 工作流程"></a>BroadcastReceiver 工作流程</h2><ul>
 <li>广播的发送有几种类型：普通广播，有序广播，粘性广播，发送接收过程是类似的</li>
 <li>一个应用处于停止态分为两种类型：1.应用安装未运行；2.应用被手动或被其他应用强停了，从Android3.1开始，处于停止状态的应用无法接收开机广播</li>
 <li>广播静态注册在应用安装的时候由系统自动完成注册，具体是由PackageManagerService完成整个注册过程，其他三大组件也是在应用安装时PMS解析并注册的。</li>
-<li><p>动态注册过程<br>   <img src="android_art_9_componentswork/BroadcastReceiver1.png" alt="image"></p>
+<li><p>动态注册过程<br>   <img src="BroadcastReceiver1.png" alt="image"></p>
 </li>
-<li><p>发送和接收过程<br>   <img src="android_art_9_componentswork/BroadcastReceiver2.png" alt="image"></p>
+<li><p>发送和接收过程<br>   <img src="BroadcastReceiver2.png" alt="image"></p>
 </li>
 </ul>
-<h2 id="ContentProvider-工作流程"><a href="#ContentProvider-工作流程" class="headerlink" title="ContentProvider 工作流程"></a>ContentProvider 工作流程</h2><p>ContentProvider启动流程：<br>    <img src="android_art_9_componentswork/ContentProvider.png" alt="image"></p>
+<h2 id="ContentProvider-工作流程"><a href="#ContentProvider-工作流程" class="headerlink" title="ContentProvider 工作流程"></a>ContentProvider 工作流程</h2><p>ContentProvider启动流程：<br>    <img src="ContentProvider.png" alt="image"></p>
 <ul>
 <li><p>启动流程：</p>
 <ul>
@@ -377,8 +377,8 @@ Service是一种计算型组件，用于在后台执行一系列计算任务。�
 
 
 <p class="pink-link-context">
-    <a href="/home/2016/08/14/android_art_7_animation/" rel="next" title="《Android艺术探索》读书笔记 第七章. Animation">
-    下一篇：《Android艺术探索》读书笔记 第七章. Animation
+    <a href="/home/2016/08/14/android_art_6_drawable/" rel="next" title="《Android艺术探索》读书笔记 第六章. Drawable">
+    下一篇：《Android艺术探索》读书笔记 第六章. Drawable
   </a>
 </p>
 
