@@ -175,8 +175,8 @@ JFrame java的GUI程序的基本思路是以JFrame为基础，它是屏幕">
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/home/categories/JNI/">
-                    JNI <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/home/categories/设计模式/">
+                    设计模式 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -290,7 +290,8 @@ JFrame java的GUI程序的基本思路是以JFrame为基础，它是屏幕">
 <li>不能在EDT中执行耗时任务，这会使得GUI事件被阻塞在队列中而得不到处理，使程序失去响应性。</li>
 <li>SwingUtilities提供了最常用的invokeAndWait()方法和invokeLater()方法，其他线程通过这两个方法可以将代码放到事件队列中，当EDT进入该代码块后，就开始执行，并对UI组件进行安全修改。这两个方法又有所区别，invokeLater()方法是异步的，即EDT将将事件放到队列中就返回；而invokeAndWait()方法是同步的，即EDT将事件放到队列中等到其Runnable执行完毕才返回，所以 注意绝对不能使用EDT来调用invokeAndWait()方法，否则会导致死锁发生 。</li>
 </ul>
-<h2 id="Swing-问题"><a href="#Swing-问题" class="headerlink" title="Swing 问题"></a>Swing 问题</h2><ul>
+<h2 id="Swing-问题"><a href="#Swing-问题" class="headerlink" title="Swing 问题"></a>Swing 问题</h2><p>在开发悦游无限打包工具遇见的一些常见的问题</p>
+<ul>
 <li><p>JLabel.setBackground()不起作用，设置不透明属性:setOpaque(false);</p>
 </li>
 <li><p>在控件绑定数据使用model的时候，默认不选中，想要设置默认选中，设置setSelectedIndex(0)</p>
@@ -307,16 +308,16 @@ JFrame java的GUI程序的基本思路是以JFrame为基础，它是屏幕">
 
                 
 <p class="pink-link-context">
-    <a href="/home/2017/09/04/Android Interview - android/" rel="next" title="Android Interview - 2">
-    上一篇：Android Interview - 2
+    <a href="/home/2017/05/17/pack/" rel="next" title="制作一个安装程序(dmg,exe)">
+    上一篇：制作一个安装程序(dmg,exe)
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/home/2017/05/17/pack/" rel="next" title="制作一个安装程序(dmg,exe)">
-    下一篇：制作一个安装程序(dmg,exe)
+    <a href="/home/2017/01/11/android_frame/" rel="next" title="Android Frame 常用框架基础解析">
+    下一篇：Android Frame 常用框架基础解析
   </a>
 </p>
 
