@@ -7,21 +7,13 @@
 
     
 
-    <title>设计模式六原则 - 开闭原则 | </title>
+    <title>第 6 页 | </title>
     <meta name="author" content="任嘉为">
-    
-    <meta name="description" content="开闭原则(Open-Closed Principle, OCP)
-用抽象构建框架，用实现扩展细节。
-
-
-抽象化是开闭原则的关键
-
-系统中对扩展开放，对修改关闭，模块应该在不修改原有代码的基础上进行扩展开发过程中，对系统进行抽象化设计，抽象化是开闭原则的关键，仅对程序中出现变化的地方做出抽象，拒绝不成">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="设计模式六原则 - 开闭原则"/>
+    
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -270,113 +262,231 @@
 
 
     <main>
-        <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
-    <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
         
-            
+
+<div class="slider">
+    <ul class="slides">
     
+       <li>
+           <a href="https://kevinrocka.github.io/home/2017/09/04/Android%20Interview%20-%20android/">
+               <img class="slider-image" src="https://github.com/KevinRocka/LiteDisk/blob/master/task.jpg?raw=true">
+               <div class="caption center-align">
+                 <h4>Android 面试基础总结</h3>
+                 <h5 class="light grey-text text-lighten-3">Android 面试基础总结</h5>
+               </div>
+           </a>
+       </li>
     
-    <a class="breadcrumb" href="/home/categories/设计模式/">设计模式</a>
+       <li>
+           <a href="https://kevinrocka.github.io/home/about/">
+               <img class="slider-image" src="http://raytaylorlin-blog.qiniudn.com/image%2Fslider%2Fabout.png">
+               <div class="caption left-align">
+                 <h4>新版本关于界面</h3>
+                 <h5 class="light grey-text text-lighten-3">查看更多关于我的事情</h5>
+               </div>
+           </a>
+       </li>
+    
+   </ul>
+ </div>
 
 
-        
 
-        
-    </div>
-</nav>
-
-<article>
+<div id="article-list" class="container main-container">
+    
+        <article class="simple-article">
     <div class="card">
         <div class="card-content">
-            
-
             <div class="article-title">
                 
     
-        <h1>设计模式六原则 - 开闭原则</h1>
+        <h1 class="indigo-link-context"><a href="/home/2016/10/09/android_art_12_bitmap/">《Android艺术探索》读书笔记 第十二章. Bitmap</a></h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/home/2017/11/02/frame_design_ocp/">2017-11-02</a></time>
 
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
+            <time class="pink-link-context" datetime="2016-10-09T02:42:00.000Z"><a href="/home/2016/10/09/android_art_12_bitmap/">2016-10-09</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/home/tags/设计模式/" class="chip pink lighten-1">设计模式</a>
+            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
         
     </div>
 
 
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#开闭原则-Open-Closed-Principle-OCP"><span class="section table-of-contents-text">开闭原则(Open-Closed Principle, OCP)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#问题"><span class="section table-of-contents-text">问题</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#解决"><span class="section table-of-contents-text">解决</span></a></li></ol>
-</div>
 
-
-            <div class="entry pink-link-context">
-                <p><img src="1.jpg" alt="image"></p>
-<h2 id="开闭原则-Open-Closed-Principle-OCP"><a href="#开闭原则-Open-Closed-Principle-OCP" class="headerlink" title="开闭原则(Open-Closed Principle, OCP)"></a>开闭原则(Open-Closed Principle, OCP)</h2><blockquote>
-<p>用抽象构建框架，用实现扩展细节。</p>
-</blockquote>
-<ul>
-<li><p>抽象化是开闭原则的关键</p>
-</li>
-<li><p>系统中对扩展开放，对修改关闭，模块应该在不修改原有代码的基础上进行扩展开发过程中，对系统进行抽象化设计，抽象化是开闭原则的关键，仅对程序中出现变化的地方做出抽象，拒绝不成熟的抽象和抽象本身一样重要。</p>
-</li>
-<li><p>修改配置文件xml或者properties而没有对源代码进行修改，认为该次修改是符合开闭原则的。</p>
-</li>
-</ul>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>第一个版本需求只有绘制圆圈的功能，第二个版本则增加了绘制线条的功能。改进方式是在源码处进行了修改增加判断else if逻辑，这样就违反了开闭原则。</p>
-<p><img src="oc1.jpg" alt="image"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Line</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"draw a line....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"draw a circle....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Canvas</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 绘制</span></span><br><span class="line"><span class="comment">	 * 增加绘制线条，则修改CanvasDraw这个类源码，增加判断逻辑，违反开闭原则</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">	    <span class="keyword">if</span>(type.equals(<span class="string">"circle"</span>))&#123;</span><br><span class="line">	       Circle circle = <span class="keyword">new</span> Circle();</span><br><span class="line">	       circle.draw();</span><br><span class="line">	    &#125;<span class="keyword">else</span> <span class="keyword">if</span>( type.equals(<span class="string">"line"</span>))&#123;</span><br><span class="line">	       Line line = <span class="keyword">new</span> Line();</span><br><span class="line">	       line.draw();</span><br><span class="line">	    &#125;</span><br><span class="line">	 &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    		Canvas canvas = <span class="keyword">new</span> Canvas();</span><br><span class="line">    		canvas.draw(<span class="string">"circle"</span>);</span><br><span class="line">    		canvas.draw(<span class="string">"line"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p><img src="frame_design_ocp/oc2.jpg" alt="image"></p>
-<p>所以还是应该用到抽象！将图形类型进行抽象化。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Line</span> <span class="keyword">extends</span> <span class="title">AbstractGraph</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"draw a line....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">extends</span> <span class="title">AbstractGraph</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"draw a circle....."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Canvas</span> </span>&#123;</span><br><span class="line">    AbstractGraph abstractGraph;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span></span>&#123;</span><br><span class="line">        abstractGraph.draw();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAbstractGraph</span><span class="params">(AbstractGraph graph)</span></span>&#123;</span><br><span class="line">        abstractGraph = graph;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//符合开闭原则的设计</span></span><br><span class="line">        Canvas draw = <span class="keyword">new</span> Canvas();</span><br><span class="line">        draw.setAbstractGraph(<span class="keyword">new</span> Line());</span><br><span class="line">        draw.draw();</span><br><span class="line">        draw.setAbstractGraph(<span class="keyword">new</span> Circle());</span><br><span class="line">        draw.draw();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>六大设计原则：</p>
-<ul>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_ocp/">开闭原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_srp/">单一职责原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_lis/">里氏替换原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_dip/">依赖倒置原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_isp/">接口隔离原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_lod/">迪米特法则</a></li>
-</ul>
-
-                
-<p class="pink-link-context">
-    <a href="/home/2017/11/02/frame_design_srp/" rel="next" title="设计模式六原则 - 单一职责原则">
-    上一篇：设计模式六原则 - 单一职责原则
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/home/2017/11/02/frame_design_lod/" rel="next" title="设计模式六原则 - 迪米特法则">
-    下一篇：设计模式六原则 - 迪米特法则
-  </a>
-</p>
-
-
-            </div>
-			
+            
         </div>
+
+        
     </div>
 </article>
 
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/home/2016/10/09/android_art_11_threadpoolexecutor/">《Android艺术探索》读书笔记 第十一章. ThreadPoolExecutor</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2016-10-09T02:42:00.000Z"><a href="/home/2016/10/09/android_art_11_threadpoolexecutor/">2016-10-09</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+        
+    </div>
 
 
 
+            
+        </div>
 
+        
+    </div>
+</article>
+
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/home/2016/10/08/android_art_10_message/">《Android艺术探索》读书笔记 第十章. Message</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2016-10-08T02:42:00.000Z"><a href="/home/2016/10/08/android_art_10_message/">2016-10-08</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+        
+    </div>
+
+
+
+            
+        </div>
+
+        
+    </div>
+</article>
+
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/home/2016/08/15/android_art_8_window/">《Android艺术探索》读书笔记 第八章. Window</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2016-08-15T02:42:00.000Z"><a href="/home/2016/08/15/android_art_8_window/">2016-08-15</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+        
+    </div>
+
+
+
+            
+        </div>
+
+        
+    </div>
+</article>
+
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/home/2016/08/15/android_art_9_componentswork/">《Android艺术探索》读书笔记 第九章. Componentswork</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2016-08-15T02:42:00.000Z"><a href="/home/2016/08/15/android_art_9_componentswork/">2016-08-15</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+        
+    </div>
+
+
+
+            
+        </div>
+
+        
+    </div>
+</article>
+
+    
+
+    <ul class="pagination center-align">
+    <li class="">
+        <a href="/home/page/5/"><i class="fa fa-angle-left"></i></a>
+    </li>
+    
+    
+        <li class="waves-effect"><a href="/">1</a></li>
+    
+        <li class="waves-effect"><a href="/page/2">2</a></li>
+    
+        <li class="waves-effect"><a href="/page/3">3</a></li>
+    
+        <li class="waves-effect"><a href="/page/4">4</a></li>
+    
+        <li class="waves-effect"><a href="/page/5">5</a></li>
+    
+        <li class="active pink"><a href="/page/6">6</a></li>
+    
+        <li class="waves-effect"><a href="/page/7">7</a></li>
+    
+        <li class="waves-effect"><a href="/page/8">8</a></li>
+    
+    
+    <li class="">
+        <a href="/home/page/7/"><i class="fa fa-angle-right"></i></a>
+    </li>
+ </ul>
 
 </div>
 
