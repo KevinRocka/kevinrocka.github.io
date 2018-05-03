@@ -7,20 +7,17 @@
 
     
 
-    <title>《Android艺术探索》读书笔记 第五章. RemoteViews | </title>
+    <title>JNI 开发一般流程 | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="RemoteView应用
-跨进程更新界面，widget和notification都运行在SystemServer进程中
+    <meta name="description" content="C++ 的类型转换
 
-单击事件一般通过PendingIntent发广播的方式来实现
-
-onEanble()只在第一次添加回调，onDeleted()删除一次回调一次，onDisable()最后一个删除">
+*">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="《Android艺术探索》读书笔记 第五章. RemoteViews"/>
+    <meta property="og:title" content="JNI 开发一般流程"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -277,7 +274,7 @@ onEanble()只在第一次添加回调，onDeleted()删除一次回调一次，on
             
     
     
-    <a class="breadcrumb" href="/home/categories/Android艺术探索/">Android艺术探索</a>
+    <a class="breadcrumb" href="/home/categories/NDK/">NDK</a>
 
 
         
@@ -294,12 +291,12 @@ onEanble()只在第一次添加回调，onDeleted()删除一次回调一次，on
             <div class="article-title">
                 
     
-        <h1>《Android艺术探索》读书笔记 第五章. RemoteViews</h1>
+        <h1>JNI 开发一般流程</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-08-13T02:42:00.000Z"><a href="/home/2016/08/13/android_art_5_remoteviews/">2016-08-13</a></time>
+            <time class="pink-link-context" datetime="2018-05-03T05:21:00.000Z"><a href="/home/2018/05/03/cppclass/">2018-05-03</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -309,85 +306,32 @@ onEanble()只在第一次添加回调，onDeleted()删除一次回调一次，on
             
     <div class="tags-row">
         
-            <a href="/home/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+            <a href="/home/tags/NDK/" class="chip pink lighten-1">NDK</a>
         
-            <a href="/home/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+            <a href="/home/tags/JNI/" class="chip pink lighten-1">JNI</a>
+        
+            <a href="/home/tags/C/" class="chip pink lighten-1">C++</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#RemoteView应用"><span class="section table-of-contents-text">RemoteView应用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PendingIntent"><span class="section table-of-contents-text">PendingIntent</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#RemoteView内部机制"><span class="section table-of-contents-text">RemoteView内部机制</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#RemoteView特例"><span class="section table-of-contents-text">RemoteView特例</span></a></li></ol>
+    
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="RemoteView应用"><a href="#RemoteView应用" class="headerlink" title="RemoteView应用"></a>RemoteView应用</h2><ul>
-<li><p>跨进程更新界面，widget和notification都运行在SystemServer进程中</p>
-</li>
-<li><p>单击事件一般通过PendingIntent发广播的方式来实现</p>
-</li>
-<li><p>onEanble()只在第一次添加回调，onDeleted()删除一次回调一次，onDisable()最后一个删除时回调，onUpdate()每次添加或更新时回调</p>
-</li>
-</ul>
-<h2 id="PendingIntent"><a href="#PendingIntent" class="headerlink" title="PendingIntent"></a>PendingIntent</h2><ul>
-<li><p>PendingIntent是即刻发生，Intent是立刻发生.典型场景还是RemoteViews的单机事件</p>
-</li>
-<li><p>PendingIntent支持三种待定意图：启动Activity(getActivity)，启动Service(getService)，发送广播(getBroadcast)</p>
-</li>
-<li><p>PendingIntent 的requestCode相同并且Intent也相同，则证明PendingIntent相同，Intent相同则需要ComponentName和intent-filter相同。</p>
-</li>
-<li><p>PendingIntent 中flags</p>
-<ul>
-<li>FLAG_ONE_SHOT:同类通知只能使用一次，后续单机打开无效</li>
-<li>FLAG_NO_CREATE:没意义</li>
-<li>FLAG_CANCEL_CURRENT: 如果PendingIntent已经存在，都会被cancle，系统创建一个新的，那些被cancel了的将无法打开</li>
-<li>FLAG_UPDATE_CURRENT: 如果PendingIntent已经存在，它们都会被更新，Intent中的Extras被替换成最新的</li>
-</ul>
-</li>
-<li><p>分析NotificationManager.nofify(id, notification) [未测试，看着有点晕]</p>
-<ul>
-<li><p>如果参数id是常量，那么多次调用notify只能弹出一个通知，后续的通知会把前面的通知完全替代掉；</p>
-</li>
-<li><p>如果参数id每次都不同，那么当PendingIntent不匹配的时候，不管采用何种标志位，这些通知之间不会相互干扰；</p>
-</li>
-<li><p>如果参数id每次都不同，且PendingIntent匹配的时候，那就要看标志位：</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="RemoteView内部机制"><a href="#RemoteView内部机制" class="headerlink" title="RemoteView内部机制"></a>RemoteView内部机制</h2><ul>
-<li><p>通知栏和widget布局文件实际上是在NotificationManagerService和AppWidgetService被加载，运行在SystemServer进程中，系统首先将view操作封装到action对象中，并将这些对象跨进程传输到远程进程，远程进程通过RemoteViews的apply方法进行View的更新操作，apply方法会遍历所有action对象来调用它们的apply方法</p>
-</li>
-<li><p>无法使用自定义View，EditText不支持在RemoteView中使用</p>
-</li>
-<li><p>RemoteViews实现了Parcelable接口，它会通过Binder传递到SystemServer进程，系统会根据RemoteViews中的包名信息获取到应用中的资源，从而完成布局文件的加载</p>
-</li>
-<li><p>系统将view操作封装成Action对象，Action同样实现了Parcelable接口，通过Binder传递到SystemServer进程。远程进程通过RemoteViews的apply方法来进行view的更新操作，RemoteViews的apply方法内部则会去遍历所有的action对象并调用它们的apply方法来进行view的更新操作。这样做的好处是不需要定义大量的Binder接口，其次批量执行RemoteViews中的更新操作提高了程序性能。</p>
-</li>
-<li><p>RemoteView的大部分方法都是通过set反射完成</p>
-</li>
-<li><p>RemoteView中，apply加载布局更新界面，reApply只会更新界面</p>
-</li>
-<li><p>setOnClickPendingIntent用于普通view设置单机事件，setPendingIntentTemplate和setOnClickFillInIntent组合使用用于ListView的item点击事件</p>
-</li>
-</ul>
-<h2 id="RemoteView特例"><a href="#RemoteView特例" class="headerlink" title="RemoteView特例"></a>RemoteView特例</h2><ul>
-<li>在两个应用中，用广播的方式完成跨进程通信，通过intent传递remoteviews，来更新另外一个进程的UI，当然RemoteView只能支持一些简单的view。</li>
-</ul>
+                <blockquote>
+<p>C++ 的类型转换</p>
+</blockquote>
+<p>* </p>
 
                 
-<p class="pink-link-context">
-    <a href="/home/2016/08/14/android_art_7_animation/" rel="next" title="《Android艺术探索》读书笔记 第七章. Animation">
-    上一篇：《Android艺术探索》读书笔记 第七章. Animation
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/home/2016/08/11/android_art_4_viewprinciple/" rel="next" title="《Android艺术探索》读书笔记 第四章. View_Principle">
-    下一篇：《Android艺术探索》读书笔记 第四章. View_Principle
+    <a href="/home/2018/05/02/jni1/" rel="next" title="JNI 开发一般流程">
+    下一篇：JNI 开发一般流程
   </a>
 </p>
 
