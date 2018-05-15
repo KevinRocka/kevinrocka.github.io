@@ -10,7 +10,7 @@
     <title>Android 插件化动态加载机制换肤 | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="前段时间被问到Android 动态换肤机制被问懵逼了，只是知道插件化换肤是可以不需要重新启动Activity，皮肤包和主APP应该是相互分离，皮肤包可以动态下载，皮肤包是一个普通的Android项目，只有简单的资源文件，没有类文件，其中做的最好的还是网易云音乐的换肤，当问到具体实现流程与内部实现方式">
+    <meta name="description" content="前段时间被问到Android 动态换肤机制被问懵逼了，只是知道插件化换肤是可以不需要重新启动Activity，皮肤包和主APP应该是相互分离，皮肤包可以动态下载，皮肤包是一个普通的Android项目，只有简单的资源文件，没有类文件，其中做的最好的还是网易云音乐的换肤，当问到具体实现流程与内部实现方式时，还是一脸的懵逼。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -316,6 +316,7 @@
 
             <div class="entry pink-link-context">
                 <p>前段时间被问到Android 动态换肤机制被问懵逼了，只是知道插件化换肤是可以不需要重新启动Activity，皮肤包和主APP应该是相互分离，皮肤包可以动态下载，皮肤包是一个普通的Android项目，只有简单的资源文件，没有类文件，其中做的最好的还是网易云音乐的换肤，当问到具体实现流程与内部实现方式时，还是一脸的懵逼。</p>
+<a id="more"></a>
 <p>先来看看成品的效果吧：</p>
 <p><img src="android_skin_1.gif" alt="image"></p>
 <p>下面是具体插件化动态换肤机制要用到的知识点思维导图 : </p>
@@ -358,6 +359,7 @@
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li>其实动态加载机制进行换肤就是通过反射机制加载.skin皮肤包的Resources文件来替换本地Resources文件，再进行界面的刷新。</li>
+<li>Github点我<a href="https://github.com/KevinRocka/SkinChange" target="_blank" rel="noopener">Github</a></li>
 </ul>
 
                 
