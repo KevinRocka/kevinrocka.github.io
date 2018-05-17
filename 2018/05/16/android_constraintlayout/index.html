@@ -7,13 +7,15 @@
 
     
 
-    <title>NDK | </title>
+    <title>Android ConstraintLayout已不新鲜的约束布局 | </title>
     <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="约束布局在2016年IO 谷歌大会早就提出来了，As 2.2早也就有了可以拖拽的拓展，现在As 都3.x了，我现在才来看这个布局也是尴尬。ConstraintLayout有效的解决了多层嵌套复杂布局的问题，加快渲染速度，有点类似与RelativeLayout和LinearLayout的集合，但是远比RelativeLayout和LinearLayout强大。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="Android ConstraintLayout已不新鲜的约束布局"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -263,42 +265,147 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Android进阶/">Android进阶</a>
+
 
         
-            <a class="breadcrumb" href="/categories/NDK/">NDK</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Android ConstraintLayout已不新鲜的约束布局</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2018-05-16T06:04:00.000Z"><a href="/2018/05/16/android_constraintlayout/">2018-05-16</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2018/05/03/cppclass/" class="collection-item grey-text text-darken-1">
-                <time datetime="2018-05-03T05:21:00.000Z">2018-05-03</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JNI 开发一般流程
-            </a>
-        
-            <a href="/2018/05/02/jni1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2018-05-02T08:54:00.000Z">2018-05-02</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JNI 开发一般流程
-            </a>
-        
-            <a href="/2017/11/02/c4jni_1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-11-02T08:54:00.000Z">2017-11-02</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                JNI - C基础1
-            </a>
+            <a href="/tags/Android进阶/" class="chip pink lighten-1">Android进阶</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Normal-基础属性"><span class="section table-of-contents-text">Normal(基础属性)</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>约束布局在2016年IO 谷歌大会早就提出来了，As 2.2早也就有了可以拖拽的拓展，现在As 都3.x了，我现在才来看这个布局也是尴尬。ConstraintLayout有效的解决了多层嵌套复杂布局的问题，加快渲染速度，有点类似与RelativeLayout和LinearLayout的集合，但是远比RelativeLayout和LinearLayout强大。</p>
+<a id="more"></a>
+<blockquote>
+<p>本文建议的是通过手写代码的方式来构造布局，等各个属性熟悉一些了再进行拖拽来减少工作量，加快开发速度。</p>
+</blockquote>
+<p>先看看效果图吧：<br><img src="0.png" alt="image"></p>
+<h3 id="Normal-基础属性"><a href="#Normal-基础属性" class="headerlink" title="Normal(基础属性)"></a>Normal(基础属性)</h3><ul>
+<li><p>解析主要属性：其实也是使用的主要方法，按照这个伪代码去理解就很简单了，套用即可，翻译过来的意思就是：将所需视图的A部位与view2的B部位对齐。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/view1"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        app:layout_constraintA_toBOf=<span class="string">"@+id/view2"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>ConstraintLayout 的这些属性是为控件添加了某个方向的约束力，根据某个方向约束力的“有无”或“强弱”，控件会位于不同的位置。当设置了基础属性不起作用时候，可以复查是不是约束力不够，也就是其他方向上没有绑定约束。</p>
+</li>
+<li><p>示例代码与效果图</p>
+<p>  示例代码：</p>
+<pre><code class="java">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;
+&lt;android.support.constraint.ConstraintLayout
+    xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
+    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span>
+    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span>
+    android:layout_width=<span class="string">"match_parent"</span>
+    android:layout_height=<span class="string">"match_parent"</span>
+    tools:context=<span class="string">".MainActivity"</span>&gt;
+
+    &lt;Button
+        android:id=<span class="string">"@+id/center"</span>
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"wrap_content"</span>
+        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>
+        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>
+        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span>
+        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span>
+        android:text=<span class="string">"center"</span>/&gt;
+
+    &lt;Button
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"wrap_content"</span>
+        android:text=<span class="string">"Left"</span>
+        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span>
+        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span>
+        app:layout_constraintRight_toLeftOf=<span class="string">"@+id/center"</span>/&gt;
+
+    &lt;Button
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"wrap_content"</span>
+        android:text=<span class="string">"Right"</span>
+        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span>
+        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span>
+        app:layout_constraintLeft_toRightOf=<span class="string">"@+id/center"</span>/&gt;
+
+    &lt;Button
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"wrap_content"</span>
+        android:text=<span class="string">"Top"</span>
+        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>
+        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>
+        app:layout_constraintBottom_toTopOf=<span class="string">"@+id/center"</span>/&gt;
+
+    &lt;Button
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"wrap_content"</span>
+        android:text=<span class="string">"Bottom"</span>
+        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>
+        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>
+        app:layout_constraintTop_toBottomOf=<span class="string">"@+id/center"</span>/&gt;
+
+&lt;/android.support.constraint.ConstraintLayout&gt;
+</code></pre>
+</li>
+</ul>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/05/09/android_skin/" rel="next" title="Android 插件化动态加载机制换肤">
+    下一篇：Android 插件化动态加载机制换肤
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
