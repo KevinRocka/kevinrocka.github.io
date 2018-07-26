@@ -7,41 +7,19 @@
 
     
 
-    <title>JNI - C基础1 | </title>
+    <title>Android 粘合剂&#39;Binder&#39;  | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="JNI 基础回顾(占位符，sizeof，for循环，指针)
+    <meta name="description" content="背景知识
+要详细掌握Android 的Binder通信机制需要先提前了解一些通信原理与Linux系统的基础知识。
 
-占位符1printf(&#34;%s\n&#34;,&#34;Hello Rocka&#34;);
-占位符以及占位符意义：
-
-
-
-符号
-占位符
-
-
-
-
-%d
-十进制整数占位符
-
-
-%c
-字符占位符
-
-
-%i
-十进制、八进制、十六进制整数占位符
-
-
-%p
-地址占位符（指针">
+RPCRPC(Remote Procedure Call)，即远程过程调用，也被称为远程方法调用。
+RPC是一种计算机通信的协议，定义就是一台电脑的Client端调用另一台电脑的Ser">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="JNI - C基础1"/>
+    <meta property="og:title" content="Android 粘合剂&#39;Binder&#39; "/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -306,7 +284,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/NDK/">NDK</a>
+    <a class="breadcrumb" href="/categories/Android进阶/">Android进阶</a>
 
 
         
@@ -323,12 +301,12 @@
             <div class="article-title">
                 
     
-        <h1>JNI - C基础1</h1>
+        <h1>Android 粘合剂&#39;Binder&#39; </h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/2017/11/02/c4jni_1/">2017-11-02</a></time>
+            <time class="pink-link-context" datetime="2018-07-23T01:34:00.000Z"><a href="/2018/07/23/android_aidl2/">2018-07-23</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -338,104 +316,249 @@
             
     <div class="tags-row">
         
-            <a href="/tags/NDK/" class="chip pink lighten-1">NDK</a>
-        
-            <a href="/tags/JNI/" class="chip pink lighten-1">JNI</a>
-        
-            <a href="/tags/C/" class="chip pink lighten-1">C</a>
+            <a href="/tags/Android进阶/" class="chip pink lighten-1">Android进阶</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#占位符"><span class="section table-of-contents-text">占位符</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#sizeof"><span class="section table-of-contents-text">sizeof</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#for循环"><span class="section table-of-contents-text">for循环</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#输入输出"><span class="section table-of-contents-text">输入输出</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#指针"><span class="section table-of-contents-text">指针</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#指针其他"><span class="section table-of-contents-text">指针其他</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#背景知识"><span class="section table-of-contents-text">背景知识</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#RPC"><span class="section table-of-contents-text">RPC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#AIDL"><span class="section table-of-contents-text">AIDL</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#用户空间-内核空间-系统调用"><span class="section table-of-contents-text">用户空间/内核空间/系统调用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#可加载内核模块-Binder驱动"><span class="section table-of-contents-text">可加载内核模块/Binder驱动</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#IPC与进程隔离"><span class="section table-of-contents-text">IPC与进程隔离</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Binder通信流程"><span class="section table-of-contents-text">Binder通信流程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#内存映射"><span class="section table-of-contents-text">内存映射</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#驱动里的Binder"><span class="section table-of-contents-text">驱动里的Binder</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#源码理解Java层Binder"><span class="section table-of-contents-text">源码理解Java层Binder</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <blockquote>
-<p>JNI 基础回顾(占位符，sizeof，for循环，指针)</p>
+                <a id="more"></a>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><blockquote>
+<p>要详细掌握Android 的Binder通信机制需要先提前了解一些通信原理与Linux系统的基础知识。</p>
 </blockquote>
-<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(<span class="string">"%s\n"</span>,<span class="string">"Hello Rocka"</span>);</span><br></pre></td></tr></table></figure>
-<p>占位符以及占位符意义：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">符号</th>
-<th style="text-align:right">占位符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">%d</td>
-<td style="text-align:right">十进制整数占位符</td>
-</tr>
-<tr>
-<td style="text-align:left">%c</td>
-<td style="text-align:right">字符占位符</td>
-</tr>
-<tr>
-<td style="text-align:left">%i</td>
-<td style="text-align:right">十进制、八进制、十六进制整数占位符</td>
-</tr>
-<tr>
-<td style="text-align:left">%p</td>
-<td style="text-align:right">地址占位符（指针占位符）</td>
-</tr>
-<tr>
-<td style="text-align:left">%f(.2f)</td>
-<td style="text-align:right">浮点类型占位符(小数点后.2f)</td>
-</tr>
-<tr>
-<td style="text-align:left">%x(X)</td>
-<td style="text-align:right">十六进制整数占位符</td>
-</tr>
-<tr>
-<td style="text-align:left">%s</td>
-<td style="text-align:right">字符串占位符</td>
-</tr>
-<tr>
-<td style="text-align:left">%o</td>
-<td style="text-align:right">八进制整数占位符</td>
-</tr>
-</tbody>
-</table>
-<h2 id="sizeof"><a href="#sizeof" class="headerlink" title="sizeof"></a>sizeof</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(<span class="string">"int类型所占%d字节数\n"</span> , sizeof(<span class="keyword">int</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><p>Windows得写法如果不标准不一定能在Linux下使用，例如下面两个:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法1：</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">5</span> ; i++)&#123;</span><br><span class="line">	printf(<span class="string">"%d\n"</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//写法2:</span></span><br><span class="line"><span class="keyword">int</span> i =<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(;i &lt; <span class="number">5</span>; i++)&#123;</span><br><span class="line">	printf(<span class="string">"%d\n"</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p>主要用scanf</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line">printf(<span class="string">"请输入一个整数:"</span>);</span><br><span class="line">scanf(<span class="string">"%d"</span>,&amp;a);</span><br><span class="line">printf(<span class="string">"i的值为:%d\n"</span>,a);</span><br></pre></td></tr></table></figure>
-<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><blockquote>
-<p>指针存储的是变量的内存地址),内存地址(系统给数据分配的门牌号)</p>
+<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><p>RPC(Remote Procedure Call)，即远程过程调用，也被称为远程方法调用。</p>
+<p>RPC是一种计算机通信的协议，定义就是一台电脑的Client端调用另一台电脑的Server程序，由Client对Server发起若干请求，Server根据收到Client的信息进行操作。<strong><em>RPC是一种典型的Client/Server模式</em></strong>。</p>
+<h3 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h3><p>RPC只是一种计算机通信协议，IDL规定了通信的规则。</p>
+<p>IDL(Interface Define Language)，即接口定义语言，<strong><em>它通过一种中立的方式来描述接口，使得在不同平台上运行的对象和用不同语言编写的程序可以相互通信交流</em></strong>。</p>
+<h3 id="用户空间-内核空间-系统调用"><a href="#用户空间-内核空间-系统调用" class="headerlink" title="用户空间/内核空间/系统调用"></a>用户空间/内核空间/系统调用</h3><p>进程空间分为 用户空间 和 内核空间（Kernel）。Android是基于Linux的，Linux Kernel是操作系统的核心，操作系统核心肯定不能让应用程序随意访问，只能访问系统让你访问的资源，不能访问的资源拒绝被访问，所以就被划分为进程空间和内核空间。用户空间访问内核空间这一操作，被称为<strong><em>系统调用</em></strong>。所有的这些访问都是在内核空间的控制下，以保证不出现越权访问，从而保证系统的安全和稳定性。</p>
+<p>二者的区别:</p>
+<ul>
+<li><strong><em>进程间，用户空间的数据不可以共享，用户空间是一个不共享空间</em></strong></li>
+<li><strong><em>进程间，内核空间的数据是可以共享，内核空间是一个可共享空间</em></strong></li>
+</ul>
+<h3 id="可加载内核模块-Binder驱动"><a href="#可加载内核模块-Binder驱动" class="headerlink" title="可加载内核模块/Binder驱动"></a>可加载内核模块/Binder驱动</h3><blockquote>
+<p>用户空间访问内核空间为系统调用，如果用户空间访问用户空间，其实就是用户层上的跨进程通信了。传统Linux的支持方式有管道，Socket等都是内核支持的。那么用户空间是怎么访问用户空间的呢？通过 “安装驱动” 的方式。</p>
 </blockquote>
-<p>定义：<br>在计算机中，所有的数据都是存放在内存中的，一般把内存中的一个字节称为一个内存单元，不同的数据类型所占用的内存单元数不一样，如int占用4个字节，char占用1个字节。为了正确地访问这些内存单元，必须为每个内存单元编上号。每个内存单元的编号是唯一的，根据编号可以准确地找到该内存单元。</p>
-<p>内存单元的编号叫做地址（Address），也称为指针（Pointer）。 </p>
-<p>指针示例1:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> b = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;b;<span class="comment">//创建一个int类型的指针，并且给他赋值，p的值就是b这个变量的内存地址</span></span><br><span class="line">printf(<span class="string">"%#x\n"</span>,p);</span><br><span class="line"></span><br><span class="line">--&gt;<span class="number">0xefa7780c</span></span><br></pre></td></tr></table></figure>
-<p>指针示例2:</p>
-<p>间接赋值。变量名，对内存空间上的一段数据的抽象.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c = <span class="number">40</span>;</span><br><span class="line"><span class="keyword">int</span> *point = &amp;c;</span><br><span class="line">printf(<span class="string">"修改前%d\n"</span> , c);</span><br><span class="line">*point = <span class="number">200</span>;</span><br><span class="line">printf(<span class="string">"修改后%d\n"</span> , c);</span><br><span class="line">change(&amp;c);</span><br><span class="line">printf(<span class="string">"再次修改后%d\n"</span> , c);</span><br><span class="line"></span><br><span class="line">--&gt;修改前<span class="number">40</span></span><br><span class="line">--&gt;修改后<span class="number">200</span></span><br><span class="line">--&gt;再次修改后<span class="number">150</span></span><br></pre></td></tr></table></figure>
-<h2 id="指针其他"><a href="#指针其他" class="headerlink" title="指针其他"></a>指针其他</h2><ol>
-<li><p>外挂：通过动态链接库注入的方式来修改内存地址来修改内存地址对应的变量，像以前的金山游侠修改器一样。</p>
+<ul>
+<li>Linux的动态可加载内核模块（Loadable Kernel Module，LKM）就是前面提到的这个驱动，模块是具有独立功能的程序，可以单独编译，不能单独运行。它在运行时被链接到内核作为内核的一部分在内核空间里运行。这样，Android系统可以通过添加一个动态可加载内核模块运行在内核空间，用户进程之间的通过这个模块作为桥梁，就可以完成通信了，当然这个动态可加载内核模块就是Binder驱动。</li>
+</ul>
+<h3 id="IPC与进程隔离"><a href="#IPC与进程隔离" class="headerlink" title="IPC与进程隔离"></a>IPC与进程隔离</h3><ul>
+<li><p>IPC 即 Inter-Process Communication (进程间通信)。</p>
 </li>
-<li><p>指针有类型，地址没有类型，地址只是内存开始的位置，类型是读取到什么位置结束。比如int读取四个字节，double读取八个字节</p>
+<li><p>进程隔离<br>为了保证安全性和独立性，用户空间一个进程不能直接操作或者访问另一个进程，即Android的进程是相互独立、隔离的</p>
 </li>
-<li><p>空指针的默认值为0</p>
+</ul>
+<p>传统进程间通信的方式 : </p>
+<p><img src="ipc.png" alt="image"></p>
+<p>缺点与不足 ： </p>
+<ul>
+<li>效率不高，数据是从 用户空间 -&gt; 内核空间 -&gt; 用户空间， 做了两次数据拷贝，浪费时间</li>
+<li>接收数据的缓存不知道具体的大小，接收方不知道要多大缓存才满足需求</li>
+</ul>
+<h2 id="Binder通信流程"><a href="#Binder通信流程" class="headerlink" title="Binder通信流程"></a>Binder通信流程</h2><blockquote>
+<p>Binder的通信用一个通俗的打电话事件进行类比：<br>小李打电话给小王，小李必须知道小王的电话号码，所以需要一个通讯录来告知小李，小王的电话号码，这个通讯录就是一张表，记录着小王名字和电话。知道了电话，当然需要拨通电话，通过基站来传递信息</p>
+</blockquote>
+<ul>
+<li><p>Binder跨进程通信机制基于Client - Server</p>
 </li>
+<li><p>Binder模型角色</p>
+<p>  | 角色  | 说明  |  类比  |<br>  |:————- |:—————:| ————-:|<br>  | Client进程 | 使用服务的进程|小李|<br>  | Server进程 | 提供服务的进程 |小王 |<br>  | ServerManager | 管理Server的注册与查询 |通讯录 |<br>  | Binder驱动 |虚拟设备驱动，是连接彼此的桥梁 |基站 |</p>
+</li>
+<li><p>Binder通信流程</p>
+<p>  <img src="ipc2.png" alt="image"></p>
+<ol>
+<li>Server进程在ServerManager中注册，注册自己需要被Client进程通信的对象object以及方法fun();</li>
+<li>Client进程向ServerManager查询对应的对象object以及方法fun()，但是Binder驱动返回的是一个”傀儡“代理对象objectProxy以及该方法，但是没有Server进程里的那个能力。</li>
+<li>Client进程拿到Binder驱动返回的代理对象，由于Client进程识别不出真假，直接调用代理对象objectProxy的方法。</li>
+<li>Binder驱动收到调用代理对象方法的消息后，一查表发现是个代理对象，之前又用代理对象objectProxy替换发送给Client进程。它真正想访问的是object对象的fun();于是Binder驱动通知Server进程，调用你的object对象的fun()，然后把结果发给我，Sever进程收到这个消息，照做之后将结果返回驱动，驱动然后把结果返回给Client进程；于是整个过程就完成了。</li>
 </ol>
+</li>
+<li><p>总结</p>
+<ul>
+<li><strong><em>Binder的核心机制是代理机制，核心的原理是内存映射</em></strong></li>
+<li>对于Binder的访问，如果是在同一个进程（不需要跨进程），那么直接返回原始的Binder实体；如果在不同进程，那么就给他一个代理对象</li>
+<li>Client进程只不过是持有了Server端的代理；代理对象协助驱动完成了跨进程通信。</li>
+</ul>
+</li>
+</ul>
+<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><ul>
+<li>本文不过多赘述，就是只比普通进程通讯少拷贝了一次数据。<a href="https://www.jianshu.com/p/719fc4758813" target="_blank" rel="noopener">Linux的内存映射</a></li>
+</ul>
+<h3 id="驱动里的Binder"><a href="#驱动里的Binder" class="headerlink" title="驱动里的Binder"></a>驱动里的Binder</h3><ul>
+<li>Server进程里面的Binder对象指的是Binder本地对象，Client里面的Binder对象值得是Binder代理对象，在跨进程通信的时候，Binder驱动会自动转换这两种数据类型。因此，Binder本地对象的保存在一个叫做binder_node的数据结构，Binder代理对象是保存在一个叫做binder_ref的数据结构中。</li>
+</ul>
+<h2 id="源码理解Java层Binder"><a href="#源码理解Java层Binder" class="headerlink" title="源码理解Java层Binder"></a>源码理解Java层Binder</h2><p>简单定义AIDL接口，AIDL通过编译项目会生成AIDL接口通信类。生成的接口继承IInterface，<strong>IInterface是进程间通信的通用接口</strong>，同时曝光了两个供外部调用的方法，生成的代码都添加了个人理解的注释。</p>
+<p><img src="aidl.png" alt="image"></p>
+<pre><code>/*
+ * This file is auto-generated.  DO NOT MODIFY.
+ * Original file: /Users/Rocka/Desktop/rocka_workspace/DEMO_AIDL/server/src/main/aidl/com/rocka/aidl/AnimalManager.aidl
+ */
+package com.rocka.aidl;
+
+public interface AnimalManager extends android.os.IInterface {
+    /**
+     * Local-side IPC implementation stub class.
+     */
+    public static abstract class Stub extends android.os.Binder implements com.rocka.aidl.AnimalManager {
+        //唯一标识，类的具体路径名，用于唯一表示这个 IInterface
+        private static final java.lang.String DESCRIPTOR = &quot;com.rocka.aidl.AnimalManager&quot;;
+
+        /**
+         * Construct the stub at attach it to the interface.
+         * 将当前接口与Binder绑定
+         */
+        public Stub() {
+            this.attachInterface(this, DESCRIPTOR);
+        }
+
+        /**
+         * Cast an IBinder object into an com.rocka.aidl.AnimalManager interface,
+         * generating a proxy if needed.
+         * 将一个IBinder 的对象转换成AnimalManger接口，如果不在一个进程创建一个代理
+         */
+        public static com.rocka.aidl.AnimalManager asInterface(android.os.IBinder obj) {
+            if ((obj == null)) {
+                return null;
+            }
+            //通过唯一标识从本地去查询
+            android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
+            if (((iin != null) &amp;&amp; (iin instanceof com.rocka.aidl.AnimalManager))) {
+                return ((com.rocka.aidl.AnimalManager) iin);
+            }
+            //查不到就返回代理
+            return new com.rocka.aidl.AnimalManager.Stub.Proxy(obj);
+        }
+
+        @Override
+        public android.os.IBinder asBinder() {
+            return this;
+        }
+
+        //关键的方法，执行自定义接口里面的方法
+        @Override
+        public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException {
+            switch (code) {
+                case INTERFACE_TRANSACTION: {
+                    reply.writeString(DESCRIPTOR);
+                    return true;
+                }
+                case TRANSACTION_addAnimal: {
+                    data.enforceInterface(DESCRIPTOR);
+                    com.rocka.aidl.Animal _arg0;
+                    if ((0 != data.readInt())) {
+                        _arg0 = com.rocka.aidl.Animal.CREATOR.createFromParcel(data);
+                    } else {
+                        _arg0 = null;
+                    }
+                    this.addAnimal(_arg0);
+                    reply.writeNoException();
+                    return true;
+                }
+                case TRANSACTION_getAnimals: {
+                    data.enforceInterface(DESCRIPTOR);
+                    java.util.List&lt;com.rocka.aidl.Animal&gt; _result = this.getAnimals();
+                    reply.writeNoException();
+                    reply.writeTypedList(_result);
+                    return true;
+                }
+            }
+            return super.onTransact(code, data, reply, flags);
+        }
+
+        private static class Proxy implements com.rocka.aidl.AnimalManager {
+            private android.os.IBinder mRemote;
+
+            Proxy(android.os.IBinder remote) {
+                mRemote = remote;
+            }
+
+            @Override
+            public android.os.IBinder asBinder() {
+                return mRemote;
+            }
+
+            public java.lang.String getInterfaceDescriptor() {
+                return DESCRIPTOR;
+            }
+
+            /**
+             * 除了基本数据类型，其他类型的参数都需要标记方向类型，in(输入)，out(输出)，inout(输入输出)
+             */
+            @Override
+            public void addAnimal(com.rocka.aidl.Animal animal) throws android.os.RemoteException {
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                try {
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    if ((animal != null)) {
+                        _data.writeInt(1);
+                        animal.writeToParcel(_data, 0);
+                    } else {
+                        _data.writeInt(0);
+                    }
+                    mRemote.transact(Stub.TRANSACTION_addAnimal, _data, _reply, 0);
+                    _reply.readException();
+                } finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
+            }
+
+            @Override
+            public java.util.List&lt;com.rocka.aidl.Animal&gt; getAnimals() throws android.os.RemoteException {
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                java.util.List&lt;com.rocka.aidl.Animal&gt; _result;
+                try {
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    mRemote.transact(Stub.TRANSACTION_getAnimals, _data, _reply, 0);
+                    _reply.readException();
+                    _result = _reply.createTypedArrayList(com.rocka.aidl.Animal.CREATOR);
+                } finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
+                return _result;
+            }
+        }
+
+        static final int TRANSACTION_addAnimal = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
+        static final int TRANSACTION_getAnimals = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
+    }
+
+    /**
+     * 除了基本数据类型，其他类型的参数都需要标记方向类型，in(输入)，out(输出)，inout(输入输出)
+     */
+    public void addAnimal(com.rocka.aidl.Animal animal) throws android.os.RemoteException;
+
+    public java.util.List&lt;com.rocka.aidl.Animal&gt; getAnimals() throws android.os.RemoteException;
+}
+</code></pre><p>源码分析：</p>
+<ul>
+<li><p>Stub 的asInterface(android.os.IBinder obj)函数的参数IBinder类型的obj，这个对象是驱动给我们的。通过唯一标识从本地去查询，它会试着查找Binder本地对象，如果找到，说明Client和Server都在同一个进程，这个参数直接就是Binder本地对象，直接强制类型转换然后返回，如果找不到，说明是BinderProxy远程对象（处于另外一个进程）那么就需要创建一个Binde代理对象，让这个Binder代理实现对于远程对象的访问。一般来说，如果是与一个远程Service对象进行通信，那么这里返回的一定是一个Binder代理对象，这个IBinder参数的实际上是BinderProxy;</p>
+</li>
+<li><p>Proxy是抽象类Stub的一个类部类，它代表的是远程进程的Binder本地代理。Proxy和Stub都继承自IBinder，所以都具有跨进程传输的能力，在通信的时候，会自动完成这两个数据类型的转换。</p>
+</li>
+<li><p>抽象类Stub的类部类实现了上文的两个抽象方法addAnimal()和getAnimals()。抽象方法先用Parcel把数据序列化了，然后iBinder调用transact()方法。transact最后通过JNI调用到talkWithDriver函数；通信过程交给驱动完成；这个函数最后通过ioctl系统调用，Client进程陷入内核态，Client调用addAnimal方法的线程挂起等待返回；驱动完成一系列的操作之后唤醒Server进程，调用了Server进程本地对象的onTransact函数（实际上由Server端线程池完成）。</p>
+</li>
+<li><p>我们再看Binder本地对象的onTransact方法（这里就是Stub类里面的此方法)。调用了Binder本地对象的addAnimal方法；这个方法将结果返回给Binder驱动，驱动唤醒挂起的Client进程里面的线程并将结果返回。于是一次跨进程调用就完成了。</p>
+</li>
+<li><p>Proxy与Stub的区别。<strong><em>虽然他们都既是Binder又是IInterface，不同的是Stub采用的是继承（is 关系），Proxy采用的是组合（has 关系）。他们均实现了所有的IInterface函数，不同的是，Stub又使用策略模式调用的是虚函数（待子类实现），而Proxy则使用组合模式。</em></strong></p>
+</li>
+</ul>
+<p>Binder就总结到这里吧，其实还有很多可以继续深入学习的。</p>
 
                 
-<p class="pink-link-context">
-    <a href="/2017/11/02/c4jni_3/" rel="next" title="设计模式六原则 - 单一职责原则">
-    上一篇：设计模式六原则 - 单一职责原则
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2017/11/02/frame_design_isp/" rel="next" title="设计模式六原则 - 接口隔离原则">
-    下一篇：设计模式六原则 - 接口隔离原则
+    <a href="/2018/07/16/android_aidl/" rel="next" title="Android 应用层跨进程通信之AIDL">
+    下一篇：Android 应用层跨进程通信之AIDL
   </a>
 </p>
 
