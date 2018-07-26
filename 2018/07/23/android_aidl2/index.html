@@ -175,14 +175,6 @@ RPC是一种计算机通信的协议，定义就是一台电脑的Client端调�
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android面试集锦/">
-                    Android面试集锦 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Unity3D/">
                     Unity3D <span class="right">1 篇</span></a>
                 </a>
@@ -193,6 +185,14 @@ RPC是一种计算机通信的协议，定义就是一台电脑的Client端调�
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Android进阶/">
                     Android进阶 <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -223,14 +223,6 @@ RPC是一种计算机通信的协议，定义就是一台电脑的Client端调�
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Java-进阶/">
-                    Java-进阶 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Android性能优化/">
                     Android性能优化 <span class="right">1 篇</span></a>
                 </a>
@@ -249,6 +241,14 @@ RPC是一种计算机通信的协议，定义就是一台电脑的Client端调�
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Android问题集锦/">
                     Android问题集锦 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Java-进阶/">
+                    Java-进阶 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -367,9 +367,40 @@ RPC是一种计算机通信的协议，定义就是一台电脑的Client端调�
 <li><p>Binder跨进程通信机制基于Client - Server</p>
 </li>
 <li><p>Binder模型角色</p>
-<p>  表头|表头|表头<br>—|:–:|—:<br>内容|内容|内容<br>内容|内容|内容</p>
-<p>   角色  | 说明  |  类比  |<br>  —|:–:|—:<br>   Client进程 | 使用服务的进程|小李|<br>   Server进程 | 提供服务的进程 |小王 |<br>   ServerManager | 管理Server的注册与查询 |通讯录 |<br>   Binder驱动 |虚拟设备驱动，是连接彼此的桥梁 |基站 |</p>
 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">角色</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:right">类比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Client进程</td>
+<td style="text-align:center">使用服务的进程</td>
+<td style="text-align:right">小李</td>
+</tr>
+<tr>
+<td style="text-align:left">Server进程</td>
+<td style="text-align:center">提供服务的进程</td>
+<td style="text-align:right">小王</td>
+</tr>
+<tr>
+<td style="text-align:left">ServerManage</td>
+<td style="text-align:center">管理Server的注册与查询</td>
+<td style="text-align:right">通讯录</td>
+</tr>
+<tr>
+<td style="text-align:left">Binder驱动</td>
+<td style="text-align:center">虚拟设备驱动，是连接彼此的桥梁</td>
+<td style="text-align:right">基站</td>
+</tr>
+</tbody>
+</table>
+<ul>
 <li><p>Binder通信流程</p>
 <p>  <img src="ipc2.png" alt="image"></p>
 <ol>
