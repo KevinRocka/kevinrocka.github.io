@@ -7,13 +7,16 @@
 
     
 
-    <title>Java 进阶 | </title>
+    <title>细说Android应用的启动过程 | </title>
     <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="冷启动和热启动冷启动，当启动应用时，后台没有相应的进程，系统从新去创建一个进程用来分配给该应用，创建和初始化Application。热启动，当启动应用时，后台已有相应的进程(按下home或者back等，没有被销毁)，不需要创建和初始化Application，直接启动该进程。
+背景知识过程1：Laun">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="细说Android应用的启动过程"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -271,30 +274,78 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Android进阶/">Android进阶</a>
+
 
         
-            <a class="breadcrumb" href="/categories/Java-进阶/">Java 进阶</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>细说Android应用的启动过程</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2018-07-26T02:34:00.000Z"><a href="/2018/07/26/android_app_start/">2018-07-26</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2018/06/25/java_concurrent_1/" class="collection-item grey-text text-darken-1">
-                <time datetime="2018-06-25T08:54:00.000Z">2018-06-25</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                Java进阶同步篇 --- wait & sleep 
-            </a>
+            <a href="/tags/Android进阶/" class="chip pink lighten-1">Android进阶</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#冷启动和热启动"><span class="section table-of-contents-text">冷启动和热启动</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#背景知识"><span class="section table-of-contents-text">背景知识</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity"><span class="section table-of-contents-text">过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <a id="more"></a>
+<h3 id="冷启动和热启动"><a href="#冷启动和热启动" class="headerlink" title="冷启动和热启动"></a>冷启动和热启动</h3><p>冷启动，当启动应用时，后台没有相应的进程，系统从新去创建一个进程用来分配给该应用，创建和初始化Application。热启动，当启动应用时，后台已有相应的进程(按下home或者back等，没有被销毁)，不需要创建和初始化Application，直接启动该进程。</p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity"><a href="#过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity" class="headerlink" title="过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity"></a>过程1：Launcher响应用户点击，通过跨进程通信通知AMS他要启动一个Activity</h3>
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/07/23/android_aidl2/" rel="next" title="Android 粘合剂&#39;Binder&#39; ">
+    下一篇：Android 粘合剂&#39;Binder&#39; 
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
