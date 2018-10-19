@@ -7,13 +7,16 @@
 
     
 
-    <title>归档：2018/5 | </title>
+    <title>APK 打包流程过程分析 | </title>
     <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="在一个APK文件中，除了有代码文件之外，还有很多资源文件。这些资源文件是通过Android资源打包工具AAPT（Android Asset Package Tool）打包到APK文件里面的。打包之前，大部分文本格式的XML资源文件还会被编译成二进制格式的XML资源文件。在本文中，我们就详细分析 XML资源文件的编译和打包的过程。
+网上相关教程已经很多，本文主要是再次分析打包的流程，做下整理归纳，为的目的是插件化开发做好知识铺垫。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="APK 打包流程过程分析"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -271,58 +274,86 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Android进阶/">Android进阶</a>
+
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>APK 打包流程过程分析</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2018-07-30T02:34:00.000Z"><a href="/2018/07/30/android_app_pack/">2018-07-30</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/Android进阶/" class="chip pink lighten-1">Android进阶</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2018
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2018/05/21/android_classloader/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2018-05-21T05:49:00.000Z">2018-05-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                类加载器ClassLoader和双亲委托模型
-                            </a>
-                        
-                            <a href="/2018/05/16/android_constraintlayout/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2018-05-16T06:04:00.000Z">2018-05-16</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                Android ConstraintLayout已不新鲜的约束布局
-                            </a>
-                        
-                            <a href="/2018/05/03/cppclass/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2018-05-03T05:21:00.000Z">2018-05-03</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JNI 开发一般流程
-                            </a>
-                        
-                            <a href="/2018/05/02/jni1/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2018-05-02T08:54:00.000Z">2018-05-02</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JNI 开发一般流程
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>在一个APK文件中，除了有代码文件之外，还有很多资源文件。这些资源文件是通过Android资源打包工具AAPT（Android Asset Package Tool）打包到APK文件里面的。打包之前，大部分文本格式的XML资源文件还会被编译成二进制格式的XML资源文件。在本文中，我们就详细分析 XML资源文件的编译和打包的过程。</p>
+<p>网上相关教程已经很多，本文主要是再次分析打包的流程，做下整理归纳，为的目的是插件化开发做好知识铺垫。</p>
+<a id="more"></a>
+<ol>
+<li>打包资源生成R.java文件</li>
+<li>处理aidl文件，生成相应java文件</li>
+<li>编译工程源代码，生成对应class文件</li>
+<li>转换对应class文件生成对应dex文件</li>
+<li>打包生成apk文件</li>
+</ol>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/07/26/android_app_start/" rel="next" title="细说Android应用的启动过程">
+    下一篇：细说Android应用的启动过程
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
