@@ -10,11 +10,7 @@
     <title>Java并发编程一之线程定义以及线程状态 | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="系列主要回顾总结Java的并发编程，大公司的面试牢固基础知识。        
-
-进程与线程
-进程是操作系统结构的基础，一系列数据操作的集合，系统资源分配调度的基本单位，同时 是线程的容器
-线程是操作系统调度的最小单元，也叫轻量级进程。进程里的线程都拥有各自的计数器，局部变量和堆栈等属性，并且能够访">
+    <meta name="description" content="系列主要回顾总结Java的并发编程，大公司的面试牢固基础知识。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -183,16 +179,16 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android进阶/">
-                    Android进阶 <span class="right">12 篇</span></a>
+                <a class="no-padding" href="/categories/Unity3D/">
+                    Unity3D <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Unity3D/">
-                    Unity3D <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
                 </a>
             </li>
 
@@ -317,8 +313,9 @@
             <div class="entry pink-link-context">
                 <p><img src="1.jpeg" alt="image"></p>
 <blockquote>
-<p>系列主要回顾总结Java的并发编程，大公司的面试牢固基础知识。        </p>
+<p>系列主要回顾总结Java的并发编程，大公司的面试牢固基础知识。   </p>
 </blockquote>
+<a id="more"></a>  
 <h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><ul>
 <li>进程是操作系统结构的基础，一系列数据操作的集合，系统资源分配调度的基本单位，同时 是线程的容器</li>
 <li>线程是操作系统调度的最小单元，也叫轻量级进程。进程里的线程都拥有各自的计数器，局部变量和堆栈等属性，并且能够访问共享的内存变量。</li>
@@ -354,6 +351,12 @@
 <p>方法2：<br>通知主线程休眠，子线程跑起来，感知变量变化，中断线程。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">        ThreadRunner threadRunner = <span class="keyword">new</span> ThreadRunner();</span><br><span class="line">        Thread stropThread = <span class="keyword">new</span> Thread(threadRunner);</span><br><span class="line">        stropThread.start();</span><br><span class="line">        Thread.sleep(<span class="number">20</span>);</span><br><span class="line">        threadRunner.exit();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadRunner</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">long</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//所有线程都会被通知到这个变量的变化</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> on = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (on)&#123;</span><br><span class="line">                i++;</span><br><span class="line">                System.out.println(<span class="string">"Thread 2 running output i:"</span> + i);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"Thread stop"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">()</span></span>&#123;</span><br><span class="line">            on = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                 
+<p class="pink-link-context">
+    <a href="/2018/10/22/java_concurrent_2/" rel="next" title="Java并发编程一之线程的同步">
+    上一篇：Java并发编程一之线程的同步
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
