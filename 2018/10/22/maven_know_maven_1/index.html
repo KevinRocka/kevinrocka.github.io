@@ -10,7 +10,7 @@
     <title>构建工具Maven一之初识Maven | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="Java项目中有三大构建工具：Ant、Maven和Gradle。经过时间的推移，Ant已经消声灭迹，以前做Android 开发对Gradle比较熟悉，以前就对Maven有一定的了解。同是构建工具，对比起来Gradle相比Maven来说比较灵活，基于Groovy的脚本，让自由度更高。Maven则在大多">
+    <meta name="description" content="Java项目中有三大构建工具：Ant、Maven和Gradle。经过时间的推移，Ant已经消声灭迹，以前做Android 开发对Gradle比较熟悉，以前就对Maven有一定的了解。同是构建工具，对比起来Gradle相比Maven来说比较灵活，基于Groovy的脚本，让自由度更高。Maven则在大多数情况下不需要进行扩展，">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -313,6 +313,7 @@
             <div class="entry pink-link-context">
                 <p>Java项目中有三大构建工具：Ant、Maven和Gradle。经过时间的推移，Ant已经消声灭迹，以前做Android 开发对Gradle比较熟悉，以前就对Maven有一定的了解。同是构建工具，<br>对比起来Gradle相比Maven来说比较灵活，基于Groovy的脚本，让自由度更高。Maven则在大多数情况下不需要进行扩展，</p>
 <p><img src="https://github.com/KevinRocka/LiteDisk/blob/master/maven_logo.jpg?raw=true" alt="image"></p>
+<a id="more"></a>  
 <h3 id="pom-xml-Project-Object-Model"><a href="#pom-xml-Project-Object-Model" class="headerlink" title="pom.xml(Project Object Model)"></a>pom.xml(Project Object Model)</h3><ul>
 <li>它是Maven中工作的基本单位，这是一个XML文件。它始终保存在该项目基本目录中的pom.xml文件。</li>
 <li>每个项目只有一个POM文件</li>
@@ -394,11 +395,17 @@
 <h3 id="Maven-清理项目"><a href="#Maven-清理项目" class="headerlink" title="Maven 清理项目"></a>Maven 清理项目</h3><p>当“mvn clean”执行，在“target”文件夹中的一切都将被删除。<br>部署进行生产<br>要部署您的项目进行生产，它总是建议使用 “mvn clean package“, 以确保始终获得最新的部署。 </p>
 
                 
+<p class="pink-link-context">
+    <a href="/2018/10/22/java_concurrent_2/" rel="next" title="Java并发编程一同步">
+    上一篇：Java并发编程一同步
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
-    <a href="/2018/10/22/spring_spring_mvc/" rel="next" title="1.Spring之初识Spring MVC">
-    下一篇：1.Spring之初识Spring MVC
+    <a href="/2018/07/30/android_app_pack/" rel="next" title="APK 打包流程过程分析">
+    下一篇：APK 打包流程过程分析
   </a>
 </p>
 
