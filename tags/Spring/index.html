@@ -7,15 +7,13 @@
 
     
 
-    <title>Spring之面向切面编程AOP | </title>
+    <title>Spring | </title>
     <meta name="author" content="任嘉为">
-    
-    <meta name="description" content="AOP(Aspect-Oriented Programming)面向切面编程，以前在做Android开发的时候，就有了解到，客户端请求网络判定网络状态，动态权限检查，从切面统一处理，就会解决很多麻烦事儿，代码高度解耦。原来其实都是从spring框架来的，看看Spring 中的AOP是什么样的。">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="Spring之面向切面编程AOP"/>
+    
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -171,8 +169,8 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android面试集锦/">
-                    Android面试集锦 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
                 </a>
             </li>
 
@@ -187,8 +185,8 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android进阶/">
-                    Android进阶 <span class="right">12 篇</span></a>
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -265,178 +263,42 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
+        
+            <a class="breadcrumb" href="/tags/Spring/">Spring</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>Spring之面向切面编程AOP</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2018-10-22T07:49:00.000Z"><a href="/2018/10/22/spring_spring_aop/">2018-10-22</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/tags/Java，Spring，服务端开发/" class="chip pink lighten-1">Java，Spring，服务端开发</a>
+            <a href="/2018/11/08/spring_spring_aop/" class="collection-item grey-text text-darken-1">
+                <time datetime="2018-11-08T04:49:00.000Z">2018-11-08</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                Spring之面向切面编程AOP
+            </a>
+        
+            <a href="/2018/11/03/spring_spring_anno/" class="collection-item grey-text text-darken-1">
+                <time datetime="2018-11-03T00:49:00.000Z">2018-11-03</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                Spring之Spring注解与数据绑定
+            </a>
+        
+            <a href="/2018/10/22/spring_spring_mvc/" class="collection-item grey-text text-darken-1">
+                <time datetime="2018-10-22T07:49:00.000Z">2018-10-22</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                Spring之初识Spring MVC
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#AOP好处"><span class="section table-of-contents-text">AOP好处</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#使用场景"><span class="section table-of-contents-text">使用场景</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#初识Aspect-普通校验和切面校验"><span class="section table-of-contents-text">初识Aspect(普通校验和切面校验)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#切面表达式"><span class="section table-of-contents-text">切面表达式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#within表达式"><span class="section table-of-contents-text">within表达式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#对象匹配"><span class="section table-of-contents-text">对象匹配</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#参数匹配"><span class="section table-of-contents-text">参数匹配</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#注解匹配"><span class="section table-of-contents-text">注解匹配</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#execution表达式"><span class="section table-of-contents-text">execution表达式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#advice注解"><span class="section table-of-contents-text">advice注解</span></a></li></ol></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <blockquote>
-<p>AOP(Aspect-Oriented Programming)面向切面编程，以前在做Android开发的时候，就有了解到，客户端请求网络判定网络状态，动态权限检查，从切面统一处理，就会解决很多麻烦事儿，代码高度解耦。原来其实都是从spring框架来的，看看Spring 中的AOP是什么样的。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
-<li>面向切面编程是一种编程范式，不是编程语言；</li>
-<li>是一种解决特殊问题的方式，不能解决所有的问题</li>
-<li>是面向对象编程OOP(封装、继承、堕胎)的一种补充。</li>
-</ol>
-<!-- more -->
-<h2 id="AOP好处"><a href="#AOP好处" class="headerlink" title="AOP好处"></a>AOP好处</h2><ol>
-<li>DRY(Dont Repeat Yourself): 不要重复代码，高度解耦</li>
-<li>SOC(Separation of Contents): 分离内容<ul>
-<li>水平分离：展示层-》服务层-》持久层</li>
-<li>垂直分离：模块的划分</li>
-<li>切面分离：切面编程是将功能性需求和非功能性需求分离出来</li>
-</ul>
-</li>
-<li>集中处理某一特定的逻辑</li>
-<li>可侵入性少，可以增加代码的可读性和可维护性</li>
-</ol>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>例如：权限控制，缓存控制，事务控制，审计日志，性能监控，异常处理，分布式追踪等基本上是非功能性的需求，下面的栗子就用一个权限校验来对比切面校验和普通校验。</p>
-<h2 id="初识Aspect-普通校验和切面校验"><a href="#初识Aspect-普通校验和切面校验" class="headerlink" title="初识Aspect(普通校验和切面校验)"></a>初识Aspect(普通校验和切面校验)</h2><ul>
-<li><p>当然首先是maven导入aspectjr的包。</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.7.4&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>普通权限校验的实现方式，在每次需要校验的前面加上固定的方法checkAccess()来校验用户是否合法。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       CurrentUserHolder.set(<span class="string">"admin"</span>);</span><br><span class="line">       productService.insertWithOnlyCheck(<span class="number">1l</span>);</span><br><span class="line">       System.out.println(<span class="string">"------------------------------Done------------------------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertWithOnlyCheck</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">       authService.checkAccess();</span><br><span class="line">       System.out.println(<span class="string">"ProductService insert --- "</span> + id);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkAccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       String user = CurrentUserHolder.get();</span><br><span class="line">       <span class="keyword">if</span> (!user.equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"user is null or wrong"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>  最终输出:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	ProductService insert --- <span class="number">1</span></span><br><span class="line">------------------------------Done------------------------------</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>切面校验</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">admiAnnotInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	CurrentUserHolder.set(<span class="string">"Rocka"</span>);</span><br><span class="line">       productService.insert(<span class="number">1l</span>);</span><br><span class="line">       System.out.println(<span class="string">"------------------------------Done------------------------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  带有自定义的AdminOnly注解    </p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AdminOnly</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"ProductService only delete --- "</span> + id);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AdminOnly &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  @Aspect 注解自定义切面校验用户</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AuthService authService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//参数表达式，想切哪些东西，拦截标注有AdminOnly的注解</span></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(AdminOnly)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminOnly</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"check start"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//在执行之前，执行一段共有逻辑</span></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"adminOnly()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">check</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"adminOnly annotation check before"</span>);</span><br><span class="line">        authService.checkAccess();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  最终输出:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	ProductService insert --- <span class="number">1</span></span><br><span class="line">------------------------------Done------------------------------</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="切面表达式"><a href="#切面表达式" class="headerlink" title="切面表达式"></a>切面表达式</h2><h3 id="within表达式"><a href="#within表达式" class="headerlink" title="within表达式"></a>within表达式</h3><ul>
-<li><p>匹配包(拦截匹配类里的所有方法)</p>
-<p>  @Pointcut(“within(com.rocka.service.ProductService)”)</p>
-</li>
-</ul>
-<ul>
-<li><p>匹配类型(拦截包及子包下所有类的方法)</p>
-<p>  @Pointcut(“within(com.rocka..*)”)</p>
-</li>
-</ul>
-<h4 id="对象匹配"><a href="#对象匹配" class="headerlink" title="对象匹配"></a>对象匹配</h4><ul>
-<li><p>目标对象的代理对象</p>
-<p>  匹配AOP对象的目标对象为指定类型的方法</p>
-<p>  @Pointcut(“this(com.rocka.bean.Product)”)</p>
-</li>
-</ul>
-<h3 id="参数匹配"><a href="#参数匹配" class="headerlink" title="参数匹配"></a>参数匹配</h3><ul>
-<li><p>匹配任何以find开头且只有一个Long参数的方法</p>
-<p>  @Pointcut(“execution(<em> </em>..find*(Long))”)</p>
-</li>
-<li><p>匹配只有一个Long参数的方法</p>
-<p>  @Pointcut(“args(Long)”)</p>
-</li>
-<li><p>匹配任何以find开头而且第一个参数为Long的方法</p>
-<p>  @Pointcut(“execution(<em> </em>..find*(Long,..))”)</p>
-</li>
-<li><p>匹配第一个参数为Long型的方法</p>
-<p>  @Pointcut(“args(Long,..)”)</p>
-</li>
-</ul>
-<h3 id="注解匹配"><a href="#注解匹配" class="headerlink" title="注解匹配"></a>注解匹配</h3><p>主要有匹配注解方法级别，类级别，参数级别的方法</p>
-<ul>
-<li><p>匹配方法标注有AdminOnly注解的方法</p>
-<p>  @Pointcut(“@annotation(com.rocka.security.AdminOnly)”)</p>
-</li>
-<li><p>匹配标注有bean类底下的方法，要求的annotation的RetentionPolicy的级别为CLASS</p>
-<p>  @Pointcut(“@within(com.google.common.annotations.Beta)”)</p>
-</li>
-<li><p>匹配标注有bean类底下的方法，要求的annotation的RetentionPolicy的级别为CLASS</p>
-<p>  @Pointcut(“@target(com.springframework.stereotype.Repository)”)</p>
-</li>
-<li><p>匹配传入的参数类标注有Repository注解的方法</p>
-<p>  @Pointcut(“@target(com.springframework.stereotype.Repository)”)</p>
-</li>
-</ul>
-<h3 id="execution表达式"><a href="#execution表达式" class="headerlink" title="execution表达式"></a>execution表达式</h3><ul>
-<li><p>@Pointcut(“execution(public <em> com.rocka.service.</em>Service.*(..))”)</p>
-<p>  execution里面的表达式当做一个方法来看。</p>
-</li>
-</ul>
-<h3 id="advice注解"><a href="#advice注解" class="headerlink" title="advice注解"></a>advice注解</h3><ul>
-<li>@Before，前置通知</li>
-<li>@After，后置通知，方法执行之后</li>
-<li>@AfterReturning，返回通知，成功执行之后</li>
-<li>@AfterThrowing，异常通知，抛出异常之后</li>
-<li>@Around，环绕通知，可以替代上面所有的通知</li>
-</ul>
-
-                
-<p class="pink-link-context">
-    <a href="/2018/10/22/spring_spring_mvc/" rel="next" title="Spring之初识Spring MVC">
-    上一篇：Spring之初识Spring MVC
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2018/07/30/android_app_pack/" rel="next" title="APK 打包流程过程分析">
-    下一篇：APK 打包流程过程分析
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>
