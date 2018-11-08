@@ -7,17 +7,13 @@
 
     
 
-    <title>《Android艺术探索》读书笔记 第十二章. Bitmap | </title>
+    <title>第 11 页 | </title>
     <meta name="author" content="任嘉为">
-    
-    <meta name="description" content="Bitmap高效加载
-BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStream和decodeByteArray从不同来源加载出一个Bitmap对象，最终的实现是在底层实现的。
-采用BitmapFactory.Options按照一定的采样">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="《Android艺术探索》读书笔记 第十二章. Bitmap"/>
+    
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -266,42 +262,51 @@ BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStre
 
 
     <main>
-        <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
-    <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
         
-            
+
+<div class="slider">
+    <ul class="slides">
     
+       <li>
+           <a href="https://kevinrocka.github.io/home/2017/09/04/Android%20Interview%20-%20android/">
+               <img class="slider-image" src="https://github.com/KevinRocka/LiteDisk/blob/master/task.jpg?raw=true">
+               <div class="caption center-align">
+                 <h4>Android 面试基础总结</h3>
+                 <h5 class="light grey-text text-lighten-3">Android 面试基础总结</h5>
+               </div>
+           </a>
+       </li>
     
-    <a class="breadcrumb" href="/categories/Android艺术探索/">Android艺术探索</a>
+       <li>
+           <a href="https://kevinrocka.github.io/home/about/">
+               <img class="slider-image" src="http://raytaylorlin-blog.qiniudn.com/image%2Fslider%2Fabout.png">
+               <div class="caption left-align">
+                 <h4>新版本关于界面</h3>
+                 <h5 class="light grey-text text-lighten-3">查看更多关于我的事情</h5>
+               </div>
+           </a>
+       </li>
+    
+   </ul>
+ </div>
 
 
-        
 
-        
-    </div>
-</nav>
-
-<article>
+<div id="article-list" class="container main-container">
+    
+        <article class="simple-article">
     <div class="card">
         <div class="card-content">
-            
-
             <div class="article-title">
                 
     
-        <h1>《Android艺术探索》读书笔记 第十二章. Bitmap</h1>
+        <h1 class="indigo-link-context"><a href="/2016/08/01/android_art_2_ipc/">《Android艺术探索》读书笔记 第二章. IPC</a></h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-10-09T02:42:00.000Z"><a href="/2016/10/09/android_art_12_bitmap/">2016-10-09</a></time>
 
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
+            <time class="pink-link-context" datetime="2016-08-01T02:42:00.000Z"><a href="/2016/08/01/android_art_2_ipc/">2016-08-01</a></time>
 
             
     <div class="tags-row">
@@ -313,78 +318,82 @@ BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStre
     </div>
 
 
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Bitmap高效加载"><span class="section table-of-contents-text">Bitmap高效加载</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Bitmap缓存策略"><span class="section table-of-contents-text">Bitmap缓存策略</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#ImageLoader的使用"><span class="section table-of-contents-text">ImageLoader的使用</span></a></li></ol>
-</div>
 
-
-            <div class="entry pink-link-context">
-                <h2 id="Bitmap高效加载"><a href="#Bitmap高效加载" class="headerlink" title="Bitmap高效加载"></a>Bitmap高效加载</h2><ul>
-<li>BitmapFactory类提供了四类方法：decodeFile、decodeResource、decodeStream和decodeByteArray从不同来源加载出一个Bitmap对象，最终的实现是在底层实现的。</li>
-<li>采用BitmapFactory.Options按照一定的采样率来加载所需尺寸的图片，因为imageview所需的图片大小往往小于图片的原始尺寸</li>
-<li>BitmapFactory.Options的inSampleSize参数，即采样率官方文档指出采样率的取值应该是2的指数，例如k，那么采样后的图片宽高均为原图片大小的 1/k。inSampleSize为2，那么采样后的图片其宽/高均为原图大小的1/2，而像素为原图的1/4，内存也为原图的1/4。</li>
-<li>如何获取图片的采样率呢? <ul>
-<li>将BitmapFactory.Options的inJustDecodeBounds参数设置为true并加载图片</li>
-<li>从BitmapFactory.Options中取出原始的宽高信息，它们对应于outWidth和outHeight</li>
-<li>根据采样率的规则并结合目标View的所需大小计算出采样率inSampleSize</li>
-<li>将BitmapFactory.Options的inJustDecodeBounds参数设为false，然后重新加载图片 </li>
-</ul>
-</li>
-<li>BitmapFactory只会解析图片的原始宽高信息，并不会去真正地加载图片，所以这个操作是轻量级的,需要注意的是，这个时候BitmapFactory获取的图片宽高信息和图片的位置以及程序运行的设备有关，这都会导致BitmapFactory获取到不同的结果。</li>
-</ul>
-<h2 id="Bitmap缓存策略"><a href="#Bitmap缓存策略" class="headerlink" title="Bitmap缓存策略"></a>Bitmap缓存策略</h2><blockquote>
-<p>最常用的缓存算法是LRU，核心是当缓存满时，会优先淘汰那些近期最少使用的缓存对象，系统中采用LRU算法的缓存有两种：LruCache(内存缓存)和DiskLruCache(磁盘缓存)。</p>
-</blockquote>
-<ul>
-<li>几种引用<ul>
-<li>强引用(StrongReference)：直接对象引用</li>
-<li>软引用(SoftReference)：当一个对象只有软引用存在时，系统内存不足对象会被gc回收</li>
-<li>弱引用(WeakReference)：当一个对象只有弱引用存在时，对象随时会被系统回收</li>
-</ul>
-</li>
-<li>LruCache是Android 3.1才有的，通过support-v4兼容包可以兼容到早期的Android版本。LruCache类是一个线程安全的泛型类，它内部采用一个LinkedHashMap以强引用的方式存储外界的缓存对象，其提供了get和put方法来完成缓存的获取和添加操作，当缓存满时，LruCache会移除较早使用的缓存对象，然后再添加新的缓存对象。</li>
-<li>DiskLruCache磁盘缓存，它不属于Android sdk的一部分，DiskLruCache的创建、缓存查找和缓存添加操作</li>
-</ul>
-<h2 id="ImageLoader的使用"><a href="#ImageLoader的使用" class="headerlink" title="ImageLoader的使用"></a>ImageLoader的使用</h2><ul>
-<li>避免发生列表item错位的解决方法<ul>
-<li>给显示图片的imageview添加tag属性，值为要加载的图片的目标url，显示的时候判断一下url是否匹配。</li>
-</ul>
-</li>
-<li>化列表的卡顿现象<ul>
-<li>不要在getView中执行耗时操作，不要在getView中直接加载图片，否则肯定会导致卡顿；</li>
-<li>控制异步任务的执行频率：在列表滑动的时候停止加载图片，等列表停下来以后再加载图片；</li>
-<li>使用硬件加速来解决莫名的卡顿问题，给Activity添加配置android:hardwareAccelerated=”true”；</li>
-<li>解决大范围上下滑动,异步任务会造成线程池的拥堵并随即带来大量的UI更新操作，解决办法是在OnScrollListener的OnScrollStateChanged方法中判断是否滑动，停止滑动在加载</li>
-</ul>
-</li>
-</ul>
-
-                
-<p class="pink-link-context">
-    <a href="/2016/10/10/android_art_1315_other/" rel="next" title="《Android艺术探索》读书笔记 剩余章. Other">
-    上一篇：《Android艺术探索》读书笔记 剩余章. Other
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2016/10/09/android_art_11_threadpoolexecutor/" rel="next" title="《Android艺术探索》读书笔记 第十一章. ThreadPoolExecutor">
-    下一篇：《Android艺术探索》读书笔记 第十一章. ThreadPoolExecutor
-  </a>
-</p>
-
-
-            </div>
-			
+            
         </div>
+
+        
     </div>
 </article>
 
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/2016/07/25/android_art_1_activity/">《Android艺术探索》读书笔记 第一章.Activity</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2016-07-25T02:42:00.000Z"><a href="/2016/07/25/android_art_1_activity/">2016-07-25</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+        
+            <a href="/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+        
+    </div>
 
 
 
+            
+        </div>
 
+        
+    </div>
+</article>
+
+    
+
+    <ul class="pagination center-align">
+    <li class="">
+        <a href="/page/10/"><i class="fa fa-angle-left"></i></a>
+    </li>
+    
+    
+        <li class="waves-effect"><a href="/">1</a></li>
+    
+        <li class="waves-effect"><a href="/page/2">2</a></li>
+    
+        <li class="waves-effect"><a href="/page/3">3</a></li>
+    
+        <li class="waves-effect"><a href="/page/4">4</a></li>
+    
+        <li class="waves-effect"><a href="/page/5">5</a></li>
+    
+        <li class="waves-effect"><a href="/page/6">6</a></li>
+    
+        <li class="waves-effect"><a href="/page/7">7</a></li>
+    
+        <li class="waves-effect"><a href="/page/8">8</a></li>
+    
+        <li class="waves-effect"><a href="/page/9">9</a></li>
+    
+        <li class="waves-effect"><a href="/page/10">10</a></li>
+    
+        <li class="active pink"><a href="/page/11">11</a></li>
+    
+    
+    <li class="disabled">
+        <a href="/"><i class="fa fa-angle-right"></i></a>
+    </li>
+ </ul>
 
 </div>
 

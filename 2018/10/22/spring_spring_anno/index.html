@@ -1,0 +1,769 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Spring之Spring注解与数据绑定 | </title>
+    <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="本文主要总结Spring 常用注解，数据绑定，以及最为常见的Json数据下发">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Spring之Spring注解与数据绑定"/>
+    <meta property="og:site_name" content="Rocka&#39;s Tec"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Rocka&#39;s Tec" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Rocka&#39;s Tec</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1423547583.03.webp" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">任嘉为</p>
+                        <p class="desc">移动开发/技术</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Unity3D/">
+                    Unity3D <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android艺术探索/">
+                    Android艺术探索 <span class="right">13 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/NDK/">
+                    NDK <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/设计模式/">
+                    设计模式 <span class="right">6 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android性能优化/">
+                    Android性能优化 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/PC应用开发/">
+                    PC应用开发 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android问题集锦/">
+                    Android问题集锦 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Spring之Spring注解与数据绑定</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2018-10-22T07:49:00.000Z"><a href="/2018/10/22/spring_spring_anno/">2018-10-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Java，Spring，服务端开发/" class="chip pink lighten-1">Java，Spring，服务端开发</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring-常用注解"><span class="section table-of-contents-text">Spring 常用注解</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#三种常规接口"><span class="section table-of-contents-text">三种常规接口</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Binding"><span class="section table-of-contents-text">Binding</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#文件上传"><span class="section table-of-contents-text">文件上传</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring与Json"><span class="section table-of-contents-text">Spring与Json</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#拦截器与过滤器"><span class="section table-of-contents-text">拦截器与过滤器</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>本文主要总结Spring 常用注解，数据绑定，以及最为常见的Json数据下发</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Spring-常用注解"><a href="#Spring-常用注解" class="headerlink" title="Spring 常用注解"></a>Spring 常用注解</h3><ul>
+<li><p>@Controller(控制器，注入服务)</p>
+<p>  Controller 注解是用于标记一个类上，使用它标记的类就是一个SpringMVC Controller对象。是一个控制器对象，这个类中方法就是具体的动作。一般是暴露出去的请求的定义。</p>
+</li>
+<li><p>@RequestMapping</p>
+<p>  是用来处理请求地址映射的注解，可以用于类火方法上。用于类上，标识类中的所有响应请求的方法是以该地址做为父路径。所以下面的地址是<a href="http://localhost:8080/parent.html/acdc" target="_blank" rel="noopener">http://localhost:8080/parent.html/acdc</a></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"parent.html"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"acdc"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello ,this is a ACDC demo"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>@Service 服务(注入Dao)</p>
+<p>  Service注解是告诉Spring，当Spring要创建UserServiceImpl的实例时，bean的名字必须交”userService”，这样当Action需要使用UserServiceImpl的实例时，就可以由Spring创建好的userService，然后注入给Action。</p>
+</li>
+<li><p>@Repository (实现Dao)</p>
+<p>  其实就是Dao的实现。</p>
+</li>
+<li><p>@Component</p>
+<p>  把普通实例化到Spring容器中，相当于配置文件中的&lt;bean id=”” class = “”/</p>
+</li>
+<li><p>@Autowired(依赖注入组件)</p>
+<p>  就是自动装配，其作用是为了消除代码Java代码里面的getter/setter与bean属性中的property。getter看个人需求，如果私有属性需要对外提供的话，应当予以保留。</p>
+</li>
+<li><p>@ResponseBody</p>
+<p>  作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，通常用来返回JSON数据或者是XML。<strong><em>在使用此注解之后不会再走试图处理器，而是直接将数据写入到输入流中，他的效果等同于通过response对象输出指定格式的数据。</em></strong></p>
+</li>
+<li><p>@RestController</p>
+<p>  RestController注解相当于@Controller和@ResponseBody两个注解的结合,返回json数据不需要在方法前面加@ResponseBody注解了，使用这个注解不能返回jsp和html页面，视图解析器无法解析。</p>
+</li>
+</ul>
+<ul>
+<li><p>@Resource</p>
+<p>  @Resource和@AutoWired比较类似，@Resource后面没有任何内容。两者的区别@Autowired默认按照byType方式进行bean匹配，@Resource默认按照byName方式进行bean匹配。@Autowired是Spring的注解，@Resource是J2EE的注解，Spring属于第三方的，J2EE是Java自己的东西，因此，建议使用@Resource注解，以减少代码和Spring之间的耦合。</p>
+</li>
+<li><p>@JsonIgnoreProperties</p>
+<p>  将这个注解写在类上之后，就会忽略类中不存在的字段，可以满足当前的需要。</p>
+</li>
+</ul>
+<h3 id="三种常规接口"><a href="#三种常规接口" class="headerlink" title="三种常规接口"></a>三种常规接口</h3><p>返回的index，是返回jsp页面的名称</p>
+<ol>
+<li><p>字符串参数来处理。请求地址(<a href="http://localhost:8080/home/index?homeId=4777" target="_blank" rel="noopener">http://localhost:8080/home/index?homeId=4777</a>)</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/index"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">(@RequestParam(<span class="string">"homeId"</span>)</span> Integer homeId, Model model) </span>&#123;</span><br><span class="line">        log.debug(<span class="string">"This is a out put homeId = &#123;&#125;"</span>, homeId);</span><br><span class="line">        Home home = homeService.getHomeById(homeId);</span><br><span class="line">        model.addAttribute(home);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用路径变量来处理。请求地址(<a href="http://localhost:8080/home/index2/5666" target="_blank" rel="noopener">http://localhost:8080/home/index2/5666</a>)</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/index2/&#123;homeId&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">index2</span><span class="params">(@PathVariable(<span class="string">"homeId"</span>)</span> Integer homeId, Map&lt;String, Object&gt; map) </span>&#123;</span><br><span class="line">        log.debug(<span class="string">"This is a out put homeId = &#123;&#125;"</span>, homeId);</span><br><span class="line">        Home home = homeService.getHomeById(homeId);</span><br><span class="line">        map.put(<span class="string">"home"</span>, home);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>使用HttpServletRequest处理。请求地址(<a href="http://localhost:8080/home/index3?homeId=333" target="_blank" rel="noopener">http://localhost:8080/home/index3?homeId=333</a>)</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"index3"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">index3</span><span class="params">(HttpServletRequest httpServletRequest)</span> </span>&#123;</span><br><span class="line">        Integer homeId = Integer.valueOf(httpServletRequest.getParameter(<span class="string">"homeId"</span>));</span><br><span class="line">        Home home = homeService.getHomeById(homeId);</span><br><span class="line">        httpServletRequest.setAttribute(<span class="string">"home"</span>, home);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h3><p>将请求中的字段<strong><em>按照名字匹配</em></strong>的原则，填入模型对象。：</p>
+<ol>
+<li><p>新建的模型类需要与JSP里的界面文件进行名称匹配.</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Home</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    String name;</span><br><span class="line">    String title;</span><br><span class="line">    String content;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在views下新建一个index.jsp的View，通过EL表达式可以${home.title}来进行展示数据的绑定</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;This is a Index Title&lt;/title&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> href=<span class="string">"../statics/css/index.css"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;Welcome to the fucking Spring world!&lt;/h2&gt;</span><br><span class="line">    &lt;ui&gt;</span><br><span class="line">        &lt;li&gt;标题:$&#123;home.title&#125;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;id:$&#123;home.id&#125;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;正文:$&#123;home.content&#125;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;名称:$&#123;home.name&#125;&lt;/li&gt;</span><br><span class="line">    &lt;/ui&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>home变量即方式二里的map.put(“home”, home)或者方式三当中的使用HttpServletRequest的httpServletRequest.setAttribute(“home”, home);</p>
+</li>
+<li><p>其他: 如果要进行项目内的页面重定向，在返回的地方使用”redirect:” + 后面的地址;</p>
+</li>
+</ol>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>文件上传的概率其实相对来说比较简单，这里标记几个关键点。Demp用例上有单独的说明，使用MultipartFile来上传文件，表单需要加上enctype=”multipart/form-data”</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">"/home/upload"</span> enctype=<span class="string">"multipart/form-data"</span>&gt;</span><br><span class="line">       &lt;input type=<span class="string">"file"</span> name=<span class="string">"file"</span>/&gt;</span><br><span class="line">       &lt;input type=<span class="string">"submit"</span>/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/upload"</span>, method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span> MultipartFile file) <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!file.isEmpty())&#123;</span><br><span class="line">            FileUtils.copyInputStreamToFile(file.getInputStream(), <span class="keyword">new</span> File(<span class="string">"/Users/Rocka/"</span> + file.getOriginalFilename()));</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"failed"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Spring与Json"><a href="#Spring与Json" class="headerlink" title="Spring与Json"></a>Spring与Json</h3><p>一般步骤</p>
+<ol>
+<li><p>pom.xml引入maven依赖。一般引入最高版本，去maven远程库看最高版本号</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.9.7&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.9.7&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br><span class="line">  &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;jackson-annotations&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;2.9.7&lt;/version&gt;</span><br><span class="line">  &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置dispacher-servlet.xml来处理接口返回的数据，主要是通过RequestMappingHandlerAdapter适配器来处理接口请求应该以什么返回等。</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"</span>/&gt;</span><br><span class="line">   &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"</span>&gt;</span><br><span class="line">       &lt;property name=<span class="string">"messageConverters"</span>&gt;</span><br><span class="line">           &lt;list&gt;</span><br><span class="line">          	 	&lt;!-- 设置返回字符串编码 --&gt;</span><br><span class="line">               &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.StringHttpMessageConverter"</span>&gt;</span><br><span class="line">                   &lt;property name=<span class="string">"supportedMediaTypes"</span>&gt;</span><br><span class="line">                       &lt;list&gt;</span><br><span class="line">                           &lt;value&gt;text/html; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                           &lt;value&gt;application/json;charset=UTF-8&lt;/value&gt;</span><br><span class="line">                       &lt;/list&gt;</span><br><span class="line">                   &lt;/property&gt;</span><br><span class="line">               &lt;/bean&gt;</span><br><span class="line">               &lt;!-- json转换器 --&gt;</span><br><span class="line">               &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</span><br><span class="line">                   &lt;property name=<span class="string">"supportedMediaTypes"</span>&gt;</span><br><span class="line">                       &lt;list&gt;</span><br><span class="line">                           &lt;value&gt;text/html; charset=UTF-8&lt;/value&gt;</span><br><span class="line">                           &lt;value&gt;application/json;charset=UTF-8&lt;/value&gt;</span><br><span class="line">                       &lt;/list&gt;</span><br><span class="line">                   &lt;/property&gt;</span><br><span class="line">               &lt;/bean&gt;</span><br><span class="line">           &lt;/list&gt;</span><br><span class="line">       &lt;/property&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>接口定义</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">   <span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">Home <span class="title">getHomeInJson</span><span class="params">(@PathVariable Integer id)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> homeService.getHomeById(id);</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@RequestMapping</span>(value = <span class="string">"/jsontype/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Home&gt; <span class="title">getHomeInJson2</span><span class="params">(@PathVariable Integer id)</span> </span>&#123;</span><br><span class="line">       Home home = homeService.getHomeById(id);</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(home, HttpStatus.OK);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="拦截器与过滤器"><a href="#拦截器与过滤器" class="headerlink" title="拦截器与过滤器"></a>拦截器与过滤器</h3><ul>
+<li><p>作用场景</p>
+<ul>
+<li>解决编码乱码问题</li>
+<li>解决权限验证问题。</li>
+</ul>
+</li>
+<li><p>过滤器</p>
+<p>  过滤器的包在org.springframework.web.filter包中。具体的配置信息在web.xml当中，因为他的作用域在web服务器当中，所有请求都会经过过滤器进行操作。</p>
+<p>  请求都经过utf8编码</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置过滤器(设置为UTF-<span class="number">8</span>) --&gt;</span><br><span class="line">   &lt;filter&gt;</span><br><span class="line">       &lt;filter-name&gt;encoding&lt;/filter-name&gt;</span><br><span class="line">       &lt;filter-<span class="class"><span class="keyword">class</span>&gt;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">filter</span>.<span class="title">CharacterEncodingFilter</span>&lt;/<span class="title">filter</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class">       &lt;<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">           &lt;<span class="title">param</span>-<span class="title">name</span>&gt;<span class="title">encoding</span>&lt;/<span class="title">param</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">           &lt;<span class="title">param</span>-<span class="title">value</span>&gt;<span class="title">utf8</span>&lt;/<span class="title">param</span>-<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="class">       &lt;/<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">   &lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="class">   &lt;<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br><span class="line"><span class="class">       &lt;<span class="title">filter</span>-<span class="title">name</span>&gt;<span class="title">encoding</span>&lt;/<span class="title">filter</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">       &lt;<span class="title">url</span>-<span class="title">pattern</span>&gt;*&lt;/<span class="title">url</span>-<span class="title">pattern</span>&gt;</span></span><br><span class="line"><span class="class">   &lt;/<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>拦截器</p>
+<p>  实现HandlerInterceptor接口</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//object handler表示被拦截请求的目标</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回true-&gt;请求被继续</span></span><br><span class="line">    <span class="comment">//返回false-&gt;请求被终止</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//可以通过ModelAndView来改变显示的视图，或者修改发往视图的方法</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"><span class="comment">//        modelAndView.addObject("name","test");</span></span><br><span class="line"><span class="comment">//        modelAndView.setViewName("/success.jsp");</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//可以做资源销毁等操作</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterCompletion</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  将拦截器注册进Spring MVC(dispatcher-servlet.xml)框架</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:interceptors&gt;</span><br><span class="line">        &lt;bean class="com.rocka.interceptor.TestInterceptor"&gt;&lt;/bean&gt;</span><br><span class="line">&lt;/mvc:interceptors&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>拦截器的执行顺序为：preHandle() -&gt; postHandle() -&gt; afterCompletion()</li>
+<li><p>多个拦截器的执行顺序为: </p>
+<p>  客户端request -&gt; preHandle1() -&gt; preHandle2() -&gt; spring controller -&gt; postHandle1() -&gt; postHandle2() -&gt; afterCompletion1() -&gt; afterCompletion2() -&gt; 客户端</p>
+</li>
+<li><p>区别</p>
+<ul>
+<li>区别一过滤器Filter依赖于Servlet容器，基于回调函数，过滤范围大。</li>
+<li>拦截器Interceptor依赖于框架容器，基于反射机制，只过滤请求</li>
+</ul>
+</li>
+<li><p>总结： 拦截器可以处理Web应用中请求的一些通用性问题，共性问题在拦截器处理，减少重复代码，利于维护</p>
+</li>
+</ul>
+
+                
+<p class="pink-link-context">
+    <a href="/2018/10/22/maven_know_maven_1/" rel="next" title="构建工具Maven一之初识Maven">
+    上一篇：构建工具Maven一之初识Maven
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2018/10/22/spring/" rel="next" title="Java并发编程一同步">
+    下一篇：Java并发编程一同步
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://weibo.com/kaan?from=profile&amp;wvr=6" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/KevinRocka" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://www.wanandroid.com/navi" target="_blank">
+                        <i class="fa fa-2x fa-bug"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="https://github.com/Jayqiu" target="_blank">Jayqiu</a>
+                
+                    <a class="social-link" href="https://github.com/Theo1016" target="_blank">Theo</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2018 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
