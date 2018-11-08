@@ -179,16 +179,16 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android面试集锦/">
-                    Android面试集锦 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android进阶/">
-                    Android进阶 <span class="right">12 篇</span></a>
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -315,9 +315,7 @@
 
 
             <div class="entry pink-link-context">
-                <blockquote>
-<p>AOP(Aspect-Oriented Programming)面向切面编程，以前在做Android开发的时候，就有了解到，客户端请求网络判定网络状态，动态权限检查，从切面统一处理，就会解决很多麻烦事儿，代码高度解耦。原来其实都是从spring框架来的，看看Spring 中的AOP是什么样的。</p>
-</blockquote>
+                <p>AOP(Aspect-Oriented Programming)面向切面编程，以前在做Android开发的时候，就有了解到，客户端请求网络判定网络状态，动态权限检查，从切面统一处理，就会解决很多麻烦事儿，代码高度解耦。原来其实都是从spring框架来的，看看Spring 中的AOP是什么样的。</p>
 <a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
 <li>面向切面编程是一种编程范式，不是编程语言；</li>
@@ -339,19 +337,19 @@
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>例如：权限控制，缓存控制，事务控制，审计日志，性能监控，异常处理，分布式追踪等基本上是非功能性的需求，下面的栗子就用一个权限校验来对比切面校验和普通校验。</p>
 <h2 id="初识Aspect-普通校验和切面校验"><a href="#初识Aspect-普通校验和切面校验" class="headerlink" title="初识Aspect(普通校验和切面校验)"></a>初识Aspect(普通校验和切面校验)</h2><ul>
 <li><p>当然首先是maven导入aspectjr的包。</p>
-  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br><span class="line">   &lt;dependency&gt;</span><br><span class="line">         &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">         &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">         &lt;version&gt;1.7.4&lt;/version&gt;</span><br><span class="line">   &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">       &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">       &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;1.8.9&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">       &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;1.7.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>普通权限校验的实现方式，在每次需要校验的前面加上固定的方法checkAccess()来校验用户是否合法。</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       CurrentUserHolder.set(<span class="string">"admin"</span>);</span><br><span class="line">       productService.insertWithOnlyCheck(<span class="number">1l</span>);</span><br><span class="line">       System.out.println(<span class="string">"------------------------------Done------------------------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertWithOnlyCheck</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">       authService.checkAccess();</span><br><span class="line">       System.out.println(<span class="string">"ProductService insert --- "</span> + id);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkAccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       String user = CurrentUserHolder.get();</span><br><span class="line">       <span class="keyword">if</span> (!user.equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"user is null or wrong"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       CurrentUserHolder.set(<span class="string">"admin"</span>);</span><br><span class="line">       productService.insertWithOnlyCheck(<span class="number">1l</span>);</span><br><span class="line">       System.out.println(<span class="string">"--------------Done---------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertWithOnlyCheck</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">        authService.checkAccess();</span><br><span class="line">        System.out.println(<span class="string">"ProductService insert --- "</span> + id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkAccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String user = CurrentUserHolder.get();</span><br><span class="line">        <span class="keyword">if</span> (!user.equals(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"user is null or wrong"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  最终输出:</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	ProductService insert --- <span class="number">1</span></span><br><span class="line">------------------------------Done------------------------------</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ProductService insert --- <span class="number">1</span></span><br><span class="line">-------------Done------------</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>切面校验</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">admiAnnotInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      	CurrentUserHolder.set(<span class="string">"Rocka"</span>);</span><br><span class="line">       productService.insert(<span class="number">1l</span>);</span><br><span class="line">       System.out.println(<span class="string">"------------------------------Done------------------------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">admiAnnotInsert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	  CurrentUserHolder.set(<span class="string">"Rocka"</span>);</span><br><span class="line">	  productService.insert(<span class="number">1l</span>);</span><br><span class="line">	  System.out.println(<span class="string">"------------Done--------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  带有自定义的AdminOnly注解    </p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AdminOnly</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">"ProductService only delete --- "</span> + id);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AdminOnly &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AdminOnly</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ProductService only delete --- "</span> + id);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AdminOnly &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  @Aspect 注解自定义切面校验用户</p>
   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    AuthService authService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//参数表达式，想切哪些东西，拦截标注有AdminOnly的注解</span></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"@annotation(AdminOnly)"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminOnly</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"check start"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//在执行之前，执行一段共有逻辑</span></span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"adminOnly()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">check</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"adminOnly annotation check before"</span>);</span><br><span class="line">        authService.checkAccess();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  最终输出:</p>
@@ -378,12 +376,18 @@
 <li><p>匹配任何以find开头且只有一个Long参数的方法</p>
 <p>  @Pointcut(“execution(<em> </em>..find*(Long))”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配只有一个Long参数的方法</p>
 <p>  @Pointcut(“args(Long)”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配任何以find开头而且第一个参数为Long的方法</p>
 <p>  @Pointcut(“execution(<em> </em>..find*(Long,..))”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配第一个参数为Long型的方法</p>
 <p>  @Pointcut(“args(Long,..)”)</p>
 </li>
@@ -393,12 +397,18 @@
 <li><p>匹配方法标注有AdminOnly注解的方法</p>
 <p>  @Pointcut(“@annotation(com.rocka.security.AdminOnly)”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配标注有bean类底下的方法，要求的annotation的RetentionPolicy的级别为CLASS</p>
 <p>  @Pointcut(“@within(com.google.common.annotations.Beta)”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配标注有bean类底下的方法，要求的annotation的RetentionPolicy的级别为CLASS</p>
 <p>  @Pointcut(“@target(com.springframework.stereotype.Repository)”)</p>
 </li>
+</ul>
+<ul>
 <li><p>匹配传入的参数类标注有Repository注解的方法</p>
 <p>  @Pointcut(“@target(com.springframework.stereotype.Repository)”)</p>
 </li>
