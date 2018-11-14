@@ -7,21 +7,13 @@
 
     
 
-    <title>设计模式六原则 - 里氏替换原则 | </title>
+    <title>工具框架 | </title>
     <meta name="author" content="任嘉为">
-    
-    <meta name="description" content="里氏替换原则(Liskov Substitution Principle, LSP）
-所有引用基类（父类）的地方必须能透明地使用其子类的对象。(子类可以扩展父类的功能，但不能改变父类原有的功能)
-
-注意
-里氏代换原则是实现开闭原则的重要方式之一
-
-在程序中尽量使用基类类型对对象进行定义，而在运行时再">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="设计模式六原则 - 里氏替换原则"/>
+    
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -271,112 +263,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-    
-    
-    <a class="breadcrumb" href="/categories/设计模式/">设计模式</a>
-
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
+        
+            <a class="breadcrumb" href="/tags/工具框架/">工具框架</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>设计模式六原则 - 里氏替换原则</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/2017/11/02/frame_design_lis/">2017-11-02</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/tags/设计模式/" class="chip pink lighten-1">设计模式</a>
+            <a href="/2018/11/12/tools_frame_protobuf/" class="collection-item grey-text text-darken-1">
+                <time datetime="2018-11-12T01:49:00.000Z">2018-11-12</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                gRPC 和 protobuf 开发框架
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#里氏替换原则-Liskov-Substitution-Principle-LSP）"><span class="section table-of-contents-text">里氏替换原则(Liskov Substitution Principle, LSP）</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#注意"><span class="section table-of-contents-text">注意</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#继承带来的风险"><span class="section table-of-contents-text">继承带来的风险</span></a></li></ol></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <h2 id="里氏替换原则-Liskov-Substitution-Principle-LSP）"><a href="#里氏替换原则-Liskov-Substitution-Principle-LSP）" class="headerlink" title="里氏替换原则(Liskov Substitution Principle, LSP）"></a>里氏替换原则(Liskov Substitution Principle, LSP）</h2><blockquote>
-<p>所有引用基类（父类）的地方必须能透明地使用其子类的对象。(子类可以扩展父类的功能，但不能改变父类原有的功能)</p>
-</blockquote>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
-<li><p>里氏代换原则是实现开闭原则的重要方式之一</p>
-</li>
-<li><p>在程序中尽量使用基类类型对对象进行定义，而在运行时再确定其子类型，用子类来替换父类。</p>
-</li>
-<li><p>最好将父类定义为抽象类或者接口，让子类去继承或者实现。运行时，子类实例替换父类实例，如果添加新功能，就新加一个子类。</p>
-</li>
-<li><p>Java 编译阶段中，Java 编辑器会检查一个程序是否符合里氏替换原则，这是一个与实现无关的、语意上的检查</p>
-</li>
-<li><p>尽量不去重载和重写父类的方法</p>
-</li>
-<li><p>传递参数时使用基类对象，除此以外，在定义成员变量、定义局部变量、确定方法返回类型时都可使用里氏代换原则。针对基类编程，在程序运行时再确定具体子类。</p>
-</li>
-</ul>
-<h3 id="继承带来的风险"><a href="#继承带来的风险" class="headerlink" title="继承带来的风险"></a>继承带来的风险</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> a , <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">func1</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">func2</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> func1(a,b)+<span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 因为不小心重写了父类的fun1方法，导致原本正常的相减功能异常</span></span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">        System.out.println(<span class="string">"100-50="</span>+b.func1(<span class="number">100</span>, <span class="number">50</span>));</span><br><span class="line">        System.out.println(<span class="string">"100-80="</span>+b.func1(<span class="number">100</span>, <span class="number">80</span>));</span><br><span class="line">        System.out.println(<span class="string">"100+20+100="</span>+b.func2(<span class="number">100</span>, <span class="number">20</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>继承包含这样一层含义：父类中凡是已经实现好的方法（相对于抽象方法而言），实际上是在设定一系列的规范和契约，虽然它不强制要求所有的子类必须遵从这些契约，但是如果子类对这些非抽象方法任意修改，就会对整个继承体系造成破坏。而里氏替换原则就是表达了这一层含义.</p>
-<p>六大设计原则：</p>
-<ul>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_ocp/">开闭原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_srp/">单一职责原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_lis/">里氏替换原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_dip/">依赖倒置原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_isp/">接口隔离原则</a></li>
-<li><a href="https://kevinrocka.github.io/home/2017/11/02/frame_design_lod/">迪米特法则</a></li>
-</ul>
-
-                
-<p class="pink-link-context">
-    <a href="/2017/11/02/android_rocka_ioc/" rel="next" title="手动做一套自己的RockaIOC">
-    上一篇：手动做一套自己的RockaIOC
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/11/02/frame_design_srp/" rel="next" title="设计模式六原则 - 单一职责原则">
-    下一篇：设计模式六原则 - 单一职责原则
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
 
 
 </div>

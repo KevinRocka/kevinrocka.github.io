@@ -1,0 +1,828 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>gRPC 和 protobuf 开发框架 | </title>
+    <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="概述gRPC就是(Google Remote process calling)谷歌开发的远程过程调用的缩写，是服务端比较常见的一种技术，对于本地过程调用，就是完成某个功能任务，在本机上执行代码就可以完成这个功能；远程过程调用就是，里客户端应用可以像调用本地对象一样直接调用另一台不同的机器上服务端应用">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="gRPC 和 protobuf 开发框架"/>
+    <meta property="og:site_name" content="Rocka&#39;s Tec"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Rocka&#39;s Tec" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Rocka&#39;s Tec</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p1423547583.03.webp" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">任嘉为</p>
+                        <p class="desc">移动开发/技术</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Unity3D/">
+                    Unity3D <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android艺术探索/">
+                    Android艺术探索 <span class="right">13 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/NDK/">
+                    NDK <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/设计模式/">
+                    设计模式 <span class="right">6 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android性能优化/">
+                    Android性能优化 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/PC应用开发/">
+                    PC应用开发 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android问题集锦/">
+                    Android问题集锦 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>gRPC 和 protobuf 开发框架</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2018-11-12T01:49:00.000Z"><a href="/2018/11/12/tools_frame_protobuf/">2018-11-12</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
+        
+            <a href="/tags/Spring/" class="chip pink lighten-1">Spring</a>
+        
+            <a href="/tags/服务端开发/" class="chip pink lighten-1">服务端开发</a>
+        
+            <a href="/tags/工具框架/" class="chip pink lighten-1">工具框架</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#概述"><span class="section table-of-contents-text">概述</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#gRPC"><span class="section table-of-contents-text">gRPC</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#gRPC-特性"><span class="section table-of-contents-text">gRPC 特性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#gRPC通信方式"><span class="section table-of-contents-text">gRPC通信方式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#gRPC优缺点"><span class="section table-of-contents-text">gRPC优缺点</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#protobuf"><span class="section table-of-contents-text">protobuf</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#protobuf的安装"><span class="section table-of-contents-text">protobuf的安装</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#protobuf用法"><span class="section table-of-contents-text">protobuf用法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#数据结构"><span class="section table-of-contents-text">数据结构</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#protobuf优缺点"><span class="section table-of-contents-text">protobuf优缺点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#grpc-java-master"><span class="section table-of-contents-text">grpc-java-master</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#gRPC-x-protobuf-Demo"><span class="section table-of-contents-text">gRPC x protobuf Demo</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>gRPC就是(Google Remote process calling)谷歌开发的远程过程调用的缩写，是服务端比较常见的一种技术，对于本地过程调用，就是完成某个功能任务，在本机上执行代码就可以完成这个功能；远程过程调用就是，里客户端应用可以像调用本地对象一样直接调用另一台不同的机器上服务端应用的方法，使得您能够更容易地创建分布式应用和服务，当然采用到的数据通信服务协议就是protobuf。</p>
+<h2 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h2><p>gRPC与其他的RPC系统框架类似，都是定义一个服务，指定它能够被远程各种类型服务端所调用的方法，在服务端实现这个接口，并启动一个服务器，来处理客户端的调用。<strong><em>在客户端同样拥有一个和服务端相同的方法存根。</em></strong></p>
+<h3 id="gRPC-特性"><a href="#gRPC-特性" class="headerlink" title="gRPC 特性"></a>gRPC 特性</h3><ul>
+<li><p>HTTP2</p>
+<p>  HTTP2(超文本传输协议第二版)，HTTP的基本语义是不变的，比如方法语义（GET/PUST/PUT/DELETE），状态码（200/404/500等）。<a href="https://blog.csdn.net/linsongbin1/article/details/54980801" target="_blank" rel="noopener">HTTP2与HTTP1的区别推荐文章</a></p>
+</li>
+<li><p>接口定义语言使用protobuf</p>
+<p>  ProtoBuf是由Google开发的一种数据序列化协议（类似于XML、JSON)，ProtoBuf能够将数据进行序列化，并广泛应用在数据存储、通信协议等。压缩和传输效率高，语法简单，表达力强</p>
+</li>
+<li><p>支持多语言</p>
+<p>  gRPC支持多种语言，并能够基于语言自动生成客户端和服务端功能库，grpc-java已经支持Android开发。</p>
+</li>
+</ul>
+<h3 id="gRPC通信方式"><a href="#gRPC通信方式" class="headerlink" title="gRPC通信方式"></a>gRPC通信方式</h3><ul>
+<li>一个请求对象对应一个返回对象 </li>
+<li>一个请求对象，服务端可以传回多个结果对象</li>
+<li>客户端传入多个请求对象，服务端返回一个响应结果 </li>
+<li>可以传入多个对象，返回多个响应对象 </li>
+</ul>
+<h3 id="gRPC优缺点"><a href="#gRPC优缺点" class="headerlink" title="gRPC优缺点"></a>gRPC优缺点</h3><ul>
+<li><p>优点</p>
+<ul>
+<li>protobuf序列化成二进制消息，性能好/效率高(空间和时间效率都表现不错)</li>
+<li>proto文件生成客户端和服务端目标代码，Ez</li>
+<li><strong><em>支持向前兼容（新加字段采用默认值）和向后兼容（忽略新加字段）</em></strong>，简化升级 </li>
+<li>序列化反序列化直接对应程序中的数据类，不需要解析后在进行其他处理</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>gRPC 没有提供提供“服务发现”、“负载均衡”、“连接池”等机制  </li>
+<li>protobuf二进制可读性差</li>
+</ul>
+</li>
+</ul>
+<h2 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h2><p>gRPC使用ProtoBuf定义服务，我们可以在.proto文件中定义服务并使用任何支持它的语言去生成客户端和服务器。</p>
+<h3 id="protobuf的安装"><a href="#protobuf的安装" class="headerlink" title="protobuf的安装"></a>protobuf的安装</h3><ol>
+<li>最新的protobuf<a href="https://github.com/protocolbuffers/protobuf" target="_blank" rel="noopener">Github</a>下载并且解压。</li>
+<li>进入解压的目录，设置编译目录(这个/usr/local/protobuf就是安装目录); ./configure –prefix=/usr/local/protobuf</li>
+<li><strong><em>安装，分别执行make和make install</em></strong></li>
+<li><p>配置环境变量编辑.bash_profile，添加配置文件</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PROTOBUF=/usr/local/protobuf</span><br><span class="line">export PATH=$PROTOBUF/bin:$PATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>source .bash_profile使配置文件生效</p>
+</li>
+<li>protoc –version检查是否安装成功</li>
+</ol>
+<h3 id="protobuf用法"><a href="#protobuf用法" class="headerlink" title="protobuf用法"></a>protobuf用法</h3><p>编写.proto文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">syntax = <span class="string">"proto3"</span>;</span><br><span class="line"></span><br><span class="line">option java_multiple_files = <span class="keyword">true</span>;</span><br><span class="line">option java_package = <span class="string">"com.rocka"</span>;</span><br><span class="line">option java_outer_classname = <span class="string">"HelloWorldProto"</span>;</span><br><span class="line">option objc_class_prefix = <span class="string">"HLW"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.rocka;</span><br><span class="line"></span><br><span class="line">service Greeter&#123;</span><br><span class="line">    <span class="comment">//定义一个方法，输入的是</span></span><br><span class="line">    <span class="function">rpc <span class="title">SayHello</span><span class="params">(HelloRequest)</span> <span class="title">returns</span><span class="params">(HelloReply)</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message HelloRequest&#123;</span><br><span class="line">    string name = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message HelloReply&#123;</span><br><span class="line">    string message = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行命令生成代码protoc –java_out=./java/com.rocka ./proto/helloworld.proto</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">.protobuf</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">Java 类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">double</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">float</td>
+</tr>
+<tr>
+<td style="text-align:left">int32</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:left">int64</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">long</td>
+</tr>
+<tr>
+<td style="text-align:left">uint32</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">int[1]</td>
+</tr>
+<tr>
+<td style="text-align:left">uint64</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">long[1]</td>
+</tr>
+<tr>
+<td style="text-align:left">sint32</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:left">sint64</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">long</td>
+</tr>
+<tr>
+<td style="text-align:left">fixed32</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">int[1]</td>
+</tr>
+<tr>
+<td style="text-align:left">fixed64</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">long[1]</td>
+</tr>
+<tr>
+<td style="text-align:left">sfixed32</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">int</td>
+</tr>
+<tr>
+<td style="text-align:left">sfixed64</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">long</td>
+</tr>
+<tr>
+<td style="text-align:left">bool</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">String</td>
+</tr>
+<tr>
+<td style="text-align:left">bytes</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">ByteString</td>
+</tr>
+</tbody>
+</table>
+<h3 id="protobuf优缺点"><a href="#protobuf优缺点" class="headerlink" title="protobuf优缺点"></a>protobuf优缺点</h3><ul>
+<li><p>优点</p>
+<ul>
+<li>性能好/效率高</li>
+<li>有代码生成机制</li>
+<li>多语言支持</li>
+<li>向前向后兼容</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>二进制格式导致可读性差</li>
+<li>缺乏自描述 </li>
+</ul>
+</li>
+</ul>
+<h3 id="grpc-java-master"><a href="#grpc-java-master" class="headerlink" title="grpc-java-master"></a>grpc-java-master</h3><ol>
+<li>下载<a href="https://github.com/grpc/grpc-java" target="_blank" rel="noopener">grpc-java-master</a></li>
+<li>进入compiler目录，执行编译../gradlew java_pluginExecutable，编译成功会在目标路径下生成grpc-java-master/compiler/build/exe/java_plugin/protoc-gen-grpc-java.exe文件。</li>
+<li><p>生成通信代码的命令行。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protoc --plugin=protoc-gen-grpc-java=build/binaries/java_pluginExecutable/protoc-gen-grpc-java \</span><br><span class="line">  --grpc-java_out=<span class="string">"$OUTPUT_FILE"</span> --proto_path=<span class="string">"$DIR_OF_PROTO_FILE"</span> <span class="string">"$PROTO_FILE"</span></span><br></pre></td></tr></table></figure>
+<p> 我本地生成的命令行为:</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --java_out=./src/main/java --plugin=protoc-gen-grpc-java=/Users/Rocka/Desktop/rocka_workspace/stack_workspace/protobuf_grpc/grpc-java-master/compiler/build/exe/java_plugin/protoc-gen-grpc-java --grpc-java_out=./src/main/java/ ./src/main/proto/helloworld.proto</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Tips:</p>
+<ol>
+<li><p>mac 下安装会遇到找不到一些头文件，需要链接头文件。下面的usr/local/protobuf就是protobuf的安装路径。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export CXXFLAGS=<span class="string">"-I/usr/local/protobuf/include"</span> LDFLAGS=<span class="string">"-L/usr/local/protobuf/lib"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成通信代码的命令行。使用了protoc-gen-grpc-java，就是为了多生成一个GreeterGrpc。</p>
+</li>
+<li>我在执行编译的时候提示有时候版本不一致，或者其他找不到文件的错误，比如本地我装的是3.6.1protobuf的，但是的是找不到3.5.1的某个文件，我又重新装了3.5.1的protobuf</li>
+</ol>
+<h2 id="gRPC-x-protobuf-Demo"><a href="#gRPC-x-protobuf-Demo" class="headerlink" title="gRPC x protobuf Demo"></a>gRPC x protobuf Demo</h2><p>下面的栗子就是一个简单的交互，其实主要是配置的问题，以及生成代码的问题。网上po的很多代码都不全，而且没有调试成功过，我这个是跑成功过的，下面是使用到的maven仓库依赖。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">        &lt;grpc.version&gt;1.16.1&lt;/grpc.version&gt;&lt;!-- CURRENT_GRPC_VERSION --&gt;</span><br><span class="line">&lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.grpc&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;grpc-netty&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;grpc.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.grpc&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;grpc-protobuf&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;grpc.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.grpc&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;grpc-stub&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;grpc.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.grpc&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;grpc-testing&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;grpc.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.11&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mockito&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mockito-core&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.9.5&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>服务端代码，一定要加上server.awaitTermination()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> port = <span class="number">8883</span>;</span><br><span class="line">    <span class="keyword">private</span> Server server;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> TestServer testServer = <span class="keyword">new</span> TestServer();</span><br><span class="line">        testServer.start();</span><br><span class="line">        testServer.blockUntilShtudown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        server = ServerBuilder.forPort(port)</span><br><span class="line">                .addService(<span class="keyword">new</span> GreeterImpl())</span><br><span class="line">                .build()</span><br><span class="line">                .start();</span><br><span class="line">        System.out.println(<span class="string">"Sever started , listening on "</span> + port);</span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="comment">// Use stderr here since the logger may have been reset by its JVM shutdown hook.</span></span><br><span class="line">                System.err.println(<span class="string">"*** shutting down gRPC server since JVM is shutting down"</span>);</span><br><span class="line">                TestServer.<span class="keyword">this</span>.stop();</span><br><span class="line">                System.err.println(<span class="string">"*** server shut down"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (server != <span class="keyword">null</span>) &#123;</span><br><span class="line">            server.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">blockUntilShtudown</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (server != <span class="keyword">null</span>) &#123;</span><br><span class="line">            server.awaitTermination();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">GreeterImpl</span> <span class="keyword">extends</span> <span class="title">GreeterGrpc</span>.<span class="title">GreeterImplBase</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">(HelloRequest request, StreamObserver&lt;HelloReply&gt; responseObserver)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"SayHello。。"</span>);</span><br><span class="line">            HelloReply reply = HelloReply.newBuilder().setMessage(<span class="string">"Hello "</span> + request.getName()).build();</span><br><span class="line">            responseObserver.onNext(reply);</span><br><span class="line">            responseObserver.onCompleted();</span><br><span class="line">            System.out.println(<span class="string">"TT:"</span> + count.incrementAndGet() + Thread.currentThread().getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ManagedChannel channel;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> GreeterGrpc.GreeterBlockingStub blockingStub;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestClient</span><span class="params">(String host, <span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext(<span class="keyword">true</span>).build();</span><br><span class="line">        blockingStub = GreeterGrpc.newBlockingStub(channel);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        channel.shutdown().awaitTermination(<span class="number">5</span>, TimeUnit.SECONDS);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">greet</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">        HelloRequest request = HelloRequest.newBuilder().setName(word).build();</span><br><span class="line">        HelloReply response;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            response = blockingStub.sayHello(request);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (StatusRuntimeException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(response.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        TestClient client = <span class="keyword">new</span> TestClient(<span class="string">"localhost"</span>, <span class="number">8883</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String user = <span class="string">"Rocka"</span>;</span><br><span class="line">            <span class="keyword">if</span>(args.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                user = args[<span class="number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">            client.greet(user);</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            client.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<p><img src="1.png" alt="image"></p>
+<p><img src="2.png" alt="image"></p>
+<p><a href="https://github.com/KevinRocka/protobuf_grpc" target="_blank" rel="noopener">项目地址</a></p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/11/08/spring_spring_aop/" rel="next" title="Spring之AOP面向切面编程">
+    下一篇：Spring之AOP面向切面编程
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="https://weibo.com/kaan?from=profile&amp;wvr=6" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/KevinRocka" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="http://www.wanandroid.com/navi" target="_blank">
+                        <i class="fa fa-2x fa-bug"></i>
+                    </a>
+                
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="https://github.com/Jayqiu" target="_blank">Jayqiu</a>
+                
+                    <a class="social-link" href="https://github.com/Theo1016" target="_blank">Theo</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2018 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
