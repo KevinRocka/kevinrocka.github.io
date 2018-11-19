@@ -171,16 +171,16 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android进阶/">
-                    Android进阶 <span class="right">12 篇</span></a>
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android面试集锦/">
-                    Android面试集锦 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
                 </a>
             </li>
 
@@ -300,9 +300,9 @@
             
     <div class="tags-row">
         
-            <a href="/tags/数据库/" class="chip pink lighten-1">数据库</a>
-        
             <a href="/tags/服务端开发/" class="chip pink lighten-1">服务端开发</a>
+        
+            <a href="/tags/数据库/" class="chip pink lighten-1">数据库</a>
         
     </div>
 
@@ -334,9 +334,7 @@
 
     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//And 类似于RDBMS中的WHERE key1=&apos;value1&apos; AND key2=&apos;value2&apos;</span><br><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;key1&quot;: value1,&quot;key2&quot;: value2&#125;)</span><br></pre></td></tr></table></figure>
 
-
     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Or nd 类似于RDBMS中的WHERE key1=&apos;value1&apos; or key2=&apos;value2&apos;</span><br><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;$or:[&#123;key1: value1&#125;,&#123;key2:value2&#125;]&#125;)</span><br></pre></td></tr></table></figure>
-
 
 3. 查找数组
 
@@ -347,16 +345,14 @@
 <li><p>更新某个值</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;表名&apos;).update(&#123;&quot;属性名&quot;:属性值&#125;,&#123;$set:&#123;&apos;属性名&apos;:&apos;属性值&apos;&#125;)</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>操作符</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//类似于RDBMS中的 where age &lt; 20</span><br><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;age&quot;:&#123;$lt:20&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p> 其余的类似为，lte —&gt; 小于等于，gt -&gt; 大于，gte -&gt;大于等于， ne -&gt;不等于</p>
+</li>
 </ol>
 </li>
 </ul>
-<pre><code>2. 操作符
-
-    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//类似于RDBMS中的 where age &lt; 20</span><br><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;age&quot;:&#123;$lt:20&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-    其余的类似为，lte —&gt; 小于等于，gt -&gt; 大于，gte -&gt;大于等于， ne -&gt;不等于
-</code></pre><ul>
+<ul>
 <li><p>其他</p>
 <ol>
 <li><p>NumberInt()构造方法表示32位整形数据。</p>
