@@ -7,13 +7,15 @@
 
     
 
-    <title>第 7 页 | </title>
+    <title>MongoDB 指令留存备忘 | </title>
     <meta name="author" content="任嘉为">
+    
+    <meta name="description" content="MongoDB 数据库操作开发常用指令，也包含了一些基础指令。(不定期更新)">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="MongoDB 指令留存备忘"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -262,231 +264,109 @@
 
 
     <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
-<div class="slider">
-    <ul class="slides">
-    
-       <li>
-           <a href="https://kevinrocka.github.io/home/2017/09/04/Android%20Interview%20-%20android/">
-               <img class="slider-image" src="https://github.com/KevinRocka/LiteDisk/blob/master/task.jpg?raw=true">
-               <div class="caption center-align">
-                 <h4>Android 面试基础总结</h3>
-                 <h5 class="light grey-text text-lighten-3">Android 面试基础总结</h5>
-               </div>
-           </a>
-       </li>
-    
-       <li>
-           <a href="https://kevinrocka.github.io/home/about/">
-               <img class="slider-image" src="http://raytaylorlin-blog.qiniudn.com/image%2Fslider%2Fabout.png">
-               <div class="caption left-align">
-                 <h4>新版本关于界面</h3>
-                 <h5 class="light grey-text text-lighten-3">查看更多关于我的事情</h5>
-               </div>
-           </a>
-       </li>
-    
-   </ul>
- </div>
+        
+    </div>
+</nav>
 
-
-
-<div id="article-list" class="container main-container">
-    
-        <article class="simple-article">
+<article>
     <div class="card">
         <div class="card-content">
+            
+
             <div class="article-title">
                 
     
-        <h1 class="indigo-link-context"><a href="/2017/11/02/c4jni_1/">JNI - C基础1</a></h1>
+        <h1>MongoDB 指令留存备忘</h1>
     
 
 
             </div>
+            <time class="pink-link-context" datetime="2018-11-18T01:49:00.000Z"><a href="/2018/11/18/mongodb/">2018-11-18</a></time>
 
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/2017/11/02/c4jni_1/">2017-11-02</a></time>
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
 
             
     <div class="tags-row">
         
-            <a href="/tags/NDK/" class="chip pink lighten-1">NDK</a>
+            <a href="/tags/服务端开发/" class="chip pink lighten-1">服务端开发</a>
         
-            <a href="/tags/JNI/" class="chip pink lighten-1">JNI</a>
-        
-            <a href="/tags/C/" class="chip pink lighten-1">C</a>
+            <a href="/tags/数据库/" class="chip pink lighten-1">数据库</a>
         
     </div>
 
 
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
+            <div class="toc pink-link-context hide-on-med-and-down">
     
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>MongoDB 数据库操作开发常用指令，也包含了一些基础指令。(不定期更新)</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/KevinRocka/LiteDisk/master/mongo.jpeg" alt="image"></p>
+<a id="more"></a>
+<ul>
+<li><p>查找</p>
+<p>  1.基础语句</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;属性名&quot;:属性值&#125;</span><br></pre></td></tr></table></figure>
+<p>  2.多重查询基础语句带上</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;属性名&quot;:属性值,&quot;属性名&quot;:属性值&#125;)</span><br></pre></td></tr></table></figure>
+<p>  3.查找数组</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;表名&apos;).find(&#123;&quot;属性名&quot;:&#123;$in:[属性值,属性值]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>更新</p>
+<p>  1.更新某个值</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;表名&apos;).update(&#123;&quot;属性名&quot;:属性值&#125;,&#123;$set:&#123;&apos;属性名&apos;:&apos;属性值&apos;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>2.测试
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;PlayerInfo&apos;).update(&#123;&quot;serverid&quot;:2,&quot;guidance&quot;:&#123;$ne:&quot;1809,1,1,4&quot;&#125;&#125;,&#123;$set:&#123;&quot;guidance&quot;:&quot;1804,1,1,4&quot;&#125;&#125;, false, true)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&apos;Summary&apos;).find(&#123;&quot;o.gid&quot;:16780712,&quot;serverid&quot;:100&#125;,&#123;$set:&#123;&quot;summaryPlayerInfo.carbonCurTown&quot;: NumberInt(407)&#125;&#125;)</span><br></pre></td></tr></table></figure>
+</code></pre>
                 
-    
-        <h1 class="indigo-link-context"><a href="/2017/11/02/frame_design_isp/">设计模式六原则 - 接口隔离原则</a></h1>
-    
+<p class="pink-link-context">
+    <a href="/2018/11/18/linux_note/" rel="next" title="Linux 指令留存备忘">
+    上一篇：Linux 指令留存备忘
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2018/11/12/tools_frame_protobuf/" rel="next" title="gRPC 和 protobuf 开发框架">
+    下一篇：gRPC 和 protobuf 开发框架
+  </a>
+</p>
 
 
             </div>
-
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/2017/11/02/frame_design_isp/">2017-11-02</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/设计模式/" class="chip pink lighten-1">设计模式</a>
-        
-    </div>
-
-
-
-            
+			
         </div>
-
-        
     </div>
 </article>
 
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2017/11/02/frame_design_lis/">设计模式六原则 - 里氏替换原则</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-11-02T08:54:00.000Z"><a href="/2017/11/02/frame_design_lis/">2017-11-02</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/设计模式/" class="chip pink lighten-1">设计模式</a>
-        
-    </div>
 
 
 
-            
-        </div>
 
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2017/10/31/android_permission/">运行时权限</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-10-31T09:54:00.000Z"><a href="/2017/10/31/android_permission/">2017-10-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/Android进阶/" class="chip pink lighten-1">Android进阶</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2017/09/04/Android Interview - android/">Android Interview - 2</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2017-09-04T08:54:00.000Z"><a href="/2017/09/04/Android Interview - android/">2017-09-04</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/Android面试集锦/" class="chip pink lighten-1">Android面试集锦</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-
-    <ul class="pagination center-align">
-    <li class="">
-        <a href="/page/6/"><i class="fa fa-angle-left"></i></a>
-    </li>
-    
-    
-        <li class="waves-effect"><a href="/">1</a></li>
-    
-        <li class="waves-effect"><a href="/page/2">2</a></li>
-    
-        <li class="waves-effect"><a href="/page/3">3</a></li>
-    
-        <li class="waves-effect"><a href="/page/4">4</a></li>
-    
-        <li class="waves-effect"><a href="/page/5">5</a></li>
-    
-        <li class="waves-effect"><a href="/page/6">6</a></li>
-    
-        <li class="active pink"><a href="/page/7">7</a></li>
-    
-        <li class="waves-effect"><a href="/page/8">8</a></li>
-    
-        <li class="waves-effect"><a href="/page/9">9</a></li>
-    
-        <li class="waves-effect"><a href="/page/10">10</a></li>
-    
-        <li class="waves-effect"><a href="/page/11">11</a></li>
-    
-    
-    <li class="">
-        <a href="/page/8/"><i class="fa fa-angle-right"></i></a>
-    </li>
- </ul>
 
 </div>
 
