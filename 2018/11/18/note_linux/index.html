@@ -179,16 +179,16 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Unity3D/">
-                    Unity3D <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android进阶/">
+                    Android进阶 <span class="right">12 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android进阶/">
-                    Android进阶 <span class="right">12 篇</span></a>
+                <a class="no-padding" href="/categories/Unity3D/">
+                    Unity3D <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -378,21 +378,18 @@
 <li><p>查找女生的成绩并且只输出姓名、成绩</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$3 == "female" &#123;print $1,$5&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>查找1986和1977年出生的人，打印姓名</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2~/(1986|1977)/" &#123;print $1&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>找出大于1990年出生的人，打印姓名，年龄</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2 &gt; "1990"&#123;print $1,$2&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计数学成绩大于90的个数</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;goodMath=0;&#125;($4=="math" &amp;&amp; $5&gt;90)&#123;goodMath++&#125;END&#123;print goodMath&#125;'</span> s.txt</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
-<pre><code>3. 查找1986和1977年出生的人，打印姓名
 
-    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2~/(1986|1977)/" &#123;print $1&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
-4. 找出大于1990年出生的人，打印姓名，年龄
-
-    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2 &gt; "1990"&#123;print $1,$2&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
-5. 统计数学成绩大于90的个数
-
-    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;goodMath=0;&#125;($4=="math" &amp;&amp; $5&gt;90)&#123;goodMath++&#125;END&#123;print goodMath&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-</code></pre>
                 
 
 
