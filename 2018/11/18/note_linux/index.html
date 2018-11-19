@@ -171,16 +171,16 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Unity3D/">
-                    Unity3D <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android面试集锦/">
+                    Android面试集锦 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android面试集锦/">
-                    Android面试集锦 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Unity3D/">
+                    Unity3D <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -227,16 +227,16 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android问题集锦/">
-                    Android问题集锦 <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/PC应用开发/">
+                    PC应用开发 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/PC应用开发/">
-                    PC应用开发 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android问题集锦/">
+                    Android问题集锦 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -335,17 +335,18 @@
 <ul>
 <li><p>基础</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep [-option] &apos;字符串&apos; 文件名</span><br></pre></td></tr></table></figure>
-</li>
+<ul>
+<li>-a: 将二进制文件也以text文件的方式搜寻数据</li>
+<li>-c: 计算找到’字符串’三个字的次数</li>
+<li>-i: 忽略大小写的不同，所以大小写视为相同</li>
+<li>-n: 顺便输出行号</li>
+<li>-v: 反向选择，也就是显示出没有’字符串’三个字内容的那一行！</li>
+<li>-r: 根据文件内容递归查找目录</li>
+<li>-r -l: 根据文件内容递归查找目录，但是不显示匹配的行，只显示匹配的文件</li>
 </ul>
-<pre><code>* -a: 将二进制文件也以text文件的方式搜寻数据
-* -c: 计算找到&apos;字符串&apos;三个字的次数
-* -i: 忽略大小写的不同，所以大小写视为相同
-* -n: 顺便输出行号
-* -v: 反向选择，也就是显示出没有&apos;字符串&apos;三个字内容的那一行！
-* -r: 根据文件内容递归查找目录
-* -r -l: 根据文件内容递归查找目录，但是不显示匹配的行，只显示匹配的文件
-</code></pre><ul>
-<li>规则表达式<ul>
+</li>
+<li><p>规则表达式</p>
+<ul>
 <li>^xxx锚定行的开始 如：’^hey’匹配所有以hey开头的行。</li>
 <li>xxx$锚定行的结束 如：’goodbye$’匹配所有以goodbye结尾的行。 </li>
 <li>.匹配一个非换行符的字符 如：’fi.d’匹配fi后接一个任意然后接一个d的字符</li>
@@ -362,36 +363,31 @@
 <ul>
 <li><p>基本语法</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;pattern1 &#123;command1;command 2…; command 3&#125;  pattern2 &#123; command …&#125;&apos;</span><br></pre></td></tr></table></figure>
-</li>
+<ul>
+<li>pattern 默认表示所有记录，pattern可以是正则表达式，也可以是关系运算表达式, command之间用；</li>
+<li>comamnd可以是输出，可以是算术运算，逻辑运算，循环控制等等</li>
 </ul>
-<pre><code>* pattern 默认表示所有记录，pattern可以是正则表达式，也可以是关系运算表达式, command之间用；
-* comamnd可以是输出，可以是算术运算，逻辑运算，循环控制等等
-</code></pre><ul>
+</li>
 <li><p>举个栗子</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Rocka 1977 male computer 83</span><br><span class="line">Tom Hanks 1989 male math 99</span><br><span class="line">Meg Ryan 1990 female chinese 78</span><br><span class="line">Matt Demon 1977 male economic 89</span><br><span class="line">Joey 1986 female english 99</span><br><span class="line">Channdler 1978 male math 89</span><br><span class="line">Phebe 1989 male math 99</span><br><span class="line">Monica 1990 female chinese 78</span><br><span class="line">Rose 1977 male computer 83 </span><br><span class="line">Richlaer 1978 male math 89</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>输出1990年生的人</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/1990/&#123;print $0&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
+<p> %0代表匹配输出所有列</p>
+</li>
+<li><p>查找女生的成绩并且只输出姓名、成绩</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$3 == "female" &#123;print $1,$5&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 </li>
 </ul>
-<pre><code>1. 输出1990年生的人
-
-    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'/1990/&#123;print $0&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
-
-    %0代表匹配输出所有列
-
-2. 查找女生的成绩并且只输出姓名、成绩
-
-    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$3 == "female" &#123;print $1,$5&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
-
-3. 查找1986和1977年出生的人，打印姓名
+<pre><code>3. 查找1986和1977年出生的人，打印姓名
 
     <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2~/(1986|1977)/" &#123;print $1&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
 
 4. 找出大于1990年出生的人，打印姓名，年龄
 
     <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2 &gt; "1990"&#123;print $1,$2&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
-
 
 5. 统计数学成绩大于90的个数
 
