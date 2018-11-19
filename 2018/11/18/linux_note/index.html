@@ -7,16 +7,15 @@
 
     
 
-    <title>《Android艺术探索》读书笔记 第四章. View_Principle | </title>
+    <title>Linux 指令留存备忘 | </title>
     <meta name="author" content="任嘉为">
     
-    <meta name="description" content="ViewRoot和DecorView
-ViewRoot 对应于ViewRootImpl，连接的WindowManager和DecorView的纽带，View 三大流程均是通过ViewRoot来完成，ActivityThread中，当Activity对象创建完毕后，将DecorView添加到Windo">
+    <meta name="description" content="Linux 服务端开发常用指令，不包含基础指令。(不定期更新)">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="《Android艺术探索》读书笔记 第四章. View_Principle"/>
+    <meta property="og:title" content="Linux 指令留存备忘"/>
     <meta property="og:site_name" content="Rocka&#39;s Tec"/>
 
     
@@ -271,10 +270,6 @@ ViewRoot 对应于ViewRootImpl，连接的WindowManager和DecorView的纽带，V
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
-    
-    
-    <a class="breadcrumb" href="/categories/Android艺术探索/">Android艺术探索</a>
-
 
         
 
@@ -290,12 +285,12 @@ ViewRoot 对应于ViewRootImpl，连接的WindowManager和DecorView的纽带，V
             <div class="article-title">
                 
     
-        <h1>《Android艺术探索》读书笔记 第四章. View_Principle</h1>
+        <h1>Linux 指令留存备忘</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-08-11T02:42:00.000Z"><a href="/2016/08/11/android_art_4_viewprinciple/">2016-08-11</a></time>
+            <time class="pink-link-context" datetime="2018-11-18T04:49:00.000Z"><a href="/2018/11/18/linux_note/">2018-11-18</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -305,90 +300,44 @@ ViewRoot 对应于ViewRootImpl，连接的WindowManager和DecorView的纽带，V
             
     <div class="tags-row">
         
-            <a href="/tags/Android艺术探索/" class="chip pink lighten-1">Android艺术探索</a>
+            <a href="/tags/Linux/" class="chip pink lighten-1">Linux</a>
         
-            <a href="/tags/读书笔记/" class="chip pink lighten-1">读书笔记</a>
+            <a href="/tags/服务端开发/" class="chip pink lighten-1">服务端开发</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#ViewRoot和DecorView"><span class="section table-of-contents-text">ViewRoot和DecorView</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#MeasureSpec"><span class="section table-of-contents-text">MeasureSpec</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#View的工作原理"><span class="section table-of-contents-text">View的工作原理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#自定义View"><span class="section table-of-contents-text">自定义View</span></a></li></ol>
+    
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="ViewRoot和DecorView"><a href="#ViewRoot和DecorView" class="headerlink" title="ViewRoot和DecorView"></a>ViewRoot和DecorView</h2><ul>
-<li>ViewRoot 对应于ViewRootImpl，连接的WindowManager和DecorView的纽带，View 三大流程均是通过ViewRoot来完成，ActivityThread中，当Activity对象创建完毕后，将DecorView添加到Window中，同时会创建ViewRootImpl对象，并将ViewRootImpl对象和DecorView关联</li>
-<li>DecorView顶级View，一般情况下包含一个垂直方向的LinearLayout，setContentView布局的确加到了id为content的FrameLayout,DecorView其实是一个FrameLayout，View层的事件先经过DecorView，然后传递我们的View</li>
-</ul>
-<h2 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h2><ul>
-<li>MeasureSpec 和 LayoutParams对应关系：<ul>
-<li>三类specMode<ul>
-<li>UNSPECIFIED：基本无视；父容器不对View有任何限制，要多大给多大；一般用于系统内部用于测量</li>
-<li>EXACTLY：父容器已经检测出View所需要的大小，View的大小就是SpecSize的值，它对应于LayoutParams中的match_parent和具体的数值</li>
-<li>AT_MOST：父容器指定了一个可用大小即SpecSize，对应于LayoutParams中的warp_content<ul>
-<li>View测量的时候，系统会将LayoutParams在父容器的约束下转换成对应的MeasureSpec，然后根据这个MeasureSpec来确定View测量后的宽高</li>
-<li>MeasureSpec不是唯一由LayoutParams来决定的，LayoutParams需要和父容器一起才能决定View的MeasureSpec，从而进一步确定view的宽高，对于DecorView，它的MeasureSpec由串口的尺寸和其自身的LayoutParams来决定的；对于普通View，它的MeasureSpec由父容器的MeasureSpec和自身的LayoutParams来共同决定</li>
-</ul>
+                <blockquote>
+<p>Linux 服务端开发常用指令，不包含基础指令。(不定期更新)</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/KevinRocka/LiteDisk/master/linux.jpeg" alt="image"></p>
+<a id="more"></a>
+<ol>
+<li><p>查看端口</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Mac: sudo lsof -i tcp:port</span><br><span class="line">Windows: netstat -pan | grep port</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>杀死某个进程</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo kill -<span class="number">9</span> PID</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
+<li><p>建立一个软连接，其实就是快捷方式，源路径文件更改后，目标路径的文件也会随着更改</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /Users/Rocka/Desktop/downjoy_workspace/xa-game-idle/struct /Library/apache-tomcat-<span class="number">8.5</span>.34/bin/</span><br></pre></td></tr></table></figure>
 </li>
-<li>普通View的MeasureSpec创建规则：<ul>
-<li>当View采取固定宽高时，不管父容器MeasureSpec是什么，View的MeasureSpec都是精确模式，并且大小是LayoutParams中的大小</li>
-<li>当View的宽高是match_parent时，如果父容器模式是精确模式，那么View的模式也是精确模式，大小是父容器的剩余空间，如果父容器是最大模式，那么view也是最大模式，大小不超过父容器剩余空间</li>
-<li>View的宽高是wrap_content时，不管父容器的模式是精确模式还是最大模式，View的模式总是最大模式，大小不超过父容器剩余空间</li>
-</ul>
+<li><p>grep查找</p>
 </li>
-</ul>
-<h2 id="View的工作原理"><a href="#View的工作原理" class="headerlink" title="View的工作原理"></a>View的工作原理</h2><ul>
-<li>measure过程<ul>
-<li>getSuggestedMinimumWidth，如果没有设置背景，返回android:minWidth的值，可以为0；View设置了背景，返回android:minWidth和背景最小宽度两证的最大值。getSuggestedMinimumWidth/Height返回值就是View在UNSPECIFIED情况下的测量宽高</li>
-<li>获取View宽高方式：<ul>
-<li>Activity/View 的onWindowFocusChanged()获取焦点或者焦点改变都要调用，onPause(),onResume()执行也要多次调用</li>
-<li>View.post(runnable)</li>
-<li>ViewTreeObserver的OnGlobalLayoutListener接口，也要注意多次调用，记得removeListener()</li>
-<li>通过View.measure(int widthMeasureSpec,int heightMeasureSpec),不推荐</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>layout过程<ul>
-<li>一般在onLayout()中去获取测量的宽高，得到的才是准确的</li>
-<li>getMeasureWidth()和getWidth()区别：最终值是相等的，第一个形成于measure过程，第二个形成于layout过程，两者赋值时机不同</li>
-</ul>
-</li>
-<li>draw过程<ul>
-<li>绘制背景background.draw(canvas);</li>
-<li>绘制自己ondraw();</li>
-<li>绘制子ViewdispatchDraw();</li>
-<li>绘制装饰onDrawScrollBars();</li>
-</ul>
-</li>
-</ul>
-<h2 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h2><ul>
-<li>让View支持wrap_content</li>
-<li>让View支持padding</li>
-<li>View本身提供post方法，最好不要用handler</li>
-<li>在onDetachedFromWindow()方法回调中停止线程和动画</li>
-<li>注意viewgroup的padding以及子元素的margin</li>
-<li>View带有滑动嵌套的情况要处理好滑动冲突    </li>
-</ul>
+</ol>
 
                 
-<p class="pink-link-context">
-    <a href="/2016/08/13/android_art_5_remoteviews/" rel="next" title="《Android艺术探索》读书笔记 第五章. RemoteViews">
-    上一篇：《Android艺术探索》读书笔记 第五章. RemoteViews
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2016/08/05/android_art_3_viewevent/" rel="next" title="《Android艺术探索》读书笔记 第三章. View_Event">
-    下一篇：《Android艺术探索》读书笔记 第三章. View_Event
+    <a href="/2018/11/12/tools_frame_protobuf/" rel="next" title="gRPC 和 protobuf 开发框架">
+    下一篇：gRPC 和 protobuf 开发框架
   </a>
 </p>
 

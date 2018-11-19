@@ -219,16 +219,16 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android性能优化/">
-                    Android性能优化 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/PC应用开发/">
+                    PC应用开发 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/PC应用开发/">
-                    PC应用开发 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android性能优化/">
+                    Android性能优化 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -302,15 +302,15 @@
         
             <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
         
-            <a href="/tags/Spring/" class="chip pink lighten-1">Spring</a>
-        
             <a href="/tags/服务端开发/" class="chip pink lighten-1">服务端开发</a>
+        
+            <a href="/tags/Spring/" class="chip pink lighten-1">Spring</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#MVC"><span class="section table-of-contents-text">MVC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring-Mvc-和Spring-Boot的区别"><span class="section table-of-contents-text">Spring Mvc 和Spring Boot的区别</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring-MVC-流程架构图"><span class="section table-of-contents-text">Spring MVC 流程架构图</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#CONFIG-MVC"><span class="section table-of-contents-text">CONFIG MVC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#新建项目一般步骤"><span class="section table-of-contents-text">新建项目一般步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#工程问题复查步骤"><span class="section table-of-contents-text">工程问题复查步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#相关代码地址"><span class="section table-of-contents-text">相关代码地址</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#MVC"><span class="section table-of-contents-text">MVC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring-Mvc-和Spring-Boot的区别"><span class="section table-of-contents-text">Spring Mvc 和Spring Boot的区别</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Spring-MVC-流程架构图"><span class="section table-of-contents-text">Spring MVC 流程架构图</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#CONFIG-MVC"><span class="section table-of-contents-text">CONFIG MVC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#新建项目一般步骤"><span class="section table-of-contents-text">新建项目一般步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#工程问题复查步骤"><span class="section table-of-contents-text">工程问题复查步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#其余提示"><span class="section table-of-contents-text">其余提示</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#相关代码地址"><span class="section table-of-contents-text">相关代码地址</span></a></li></ol>
 </div>
 
 
@@ -393,12 +393,16 @@
 <li>还有问题再在intellij idea的右侧有Maven Projects的页签看是否有error。有error代表导入maven库失败。</li>
 <li>在project Structrue中的dependencies看库是否真的导进去。没有导进去的话，Add + Library</li>
 </ol>
+<h3 id="其余提示"><a href="#其余提示" class="headerlink" title="其余提示"></a>其余提示</h3><p>新建一个webapp，New-&gt;Module/Project-&gt;Maven-&gt;maven-archetype-webapp<br>web.xml配置文件默认使用2.3，不支持el。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE web-app PUBLIC</span><br><span class="line"> &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span><br><span class="line"> &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span><br></pre></td></tr></table></figure>
+<p>所以改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app version=&quot;2.4&quot;</span><br><span class="line">         xmlns=&quot;http://java.sun.com/xml/ns/j2ee&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/j2ee</span><br><span class="line">         http://java.sun.com/xml/ns/j2ee/web-app-2_3.xsd&quot;&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="相关代码地址"><a href="#相关代码地址" class="headerlink" title="相关代码地址"></a>相关代码地址</h3><p><a href="https://github.com/KevinRocka/SpringDemo" target="_blank" rel="noopener">GitHub点我</a></p>
 
                 
 <p class="pink-link-context">
-    <a href="/2018/10/22/java_concurrent_1/" rel="next" title="Java并发编程一之线程定义以及线程状态">
-    上一篇：Java并发编程一之线程定义以及线程状态
+    <a href="/2018/10/22/maven_know_maven_1/" rel="next" title="构建工具Maven一之初识Maven">
+    上一篇：构建工具Maven一之初识Maven
   </a>
 </p>
 
