@@ -357,6 +357,15 @@
 </ul>
 </li>
 </ul>
+<ul>
+<li><p>举个栗子</p>
+<ol>
+<li><p>查询字段并列查询 </p>
+<p>grep ‘activity|416839952’ /data/misc_apps/hero-provider-6/logs/session/statics.log.2018-11-21 | grep ‘5b1247a04f0cfa3879c0fd2b’</p>
+</li>
+</ol>
+</li>
+</ul>
 <h2 id="AWK语句"><a href="#AWK语句" class="headerlink" title="AWK语句"></a>AWK语句</h2><blockquote>
 <p><strong><em>awk是一种编程语言，是一个优良的文本处理工具；</em></strong>用于在linux/unix下对文本和数据进行处，它支持用户自定义函数和动态正则表达式等先进功能，是linux/unix下的一个强大编程工具。</p>
 </blockquote>
@@ -385,8 +394,17 @@
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'$2 &gt; "1990"&#123;print $1,$2&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>统计数学成绩大于90的个数</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;goodMath=0;&#125;($4=="math" &amp;&amp; $5&gt;90)&#123;goodMath++&#125;END&#123;print goodMath&#125;'</span> s.txt</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'BEGIN&#123;goodMath=0;&#125;($4=="math" &amp;&amp; $5&gt;90)&#123;goodMath++&#125;END&#123;print goodMath&#125;'</span> s.txt</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
+</li>
+<li><p>复合表达式的常规写法如下：</p>
+<ul>
+<li><p>( 第一个表达式 ) &amp; ( 第二个表达式 )<br>这里只有当“第一个表达式” 和“第二个表达式”都是真值时整个表达式才为真。</p>
+</li>
+<li><p>( 第一个表达式 ) || ( 第二个表达式)<br>这里只要“第一个表达式” 为真或“第二个表达式”为真，整个表达式就为真</p>
+</li>
+</ul>
 </li>
 </ul>
 
